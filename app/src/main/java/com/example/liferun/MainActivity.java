@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else {
             if (hasOAuthPermission()){
-//                readData();
+                readData();
             }
             else {
                 Toast.makeText(MainActivity.this,
@@ -783,15 +783,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-    public void startListActivity(View v){
-        Intent intent = new Intent(this, ListActivity.class);
-        startActivity(intent);
-    }
 
-    public void startCalendarActivity(View v){
-        Intent intent = new Intent(this, CalendarActivity.class);
-        startActivity(intent);
-    }
 
     public void startSettingsActivity(View v){
         Intent intent = new Intent(this, SettingsActivity.class);
