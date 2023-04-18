@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/mainPage">
+    <fragment
+        android:id="@+id/mainPage"
+        android:name="com.example.liferun.MainPage"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/calendarPage"
+        android:name="com.example.liferun.CalendarPage"
+        android:label="fragment_calendar_page"
+        tools:layout="@layout/fragment_calendar_page" />
+    <fragment
+        android:id="@+id/listPage"
+        android:name="com.example.liferun.ListPage"
+        android:label="fragment_list_page"
+        tools:layout="@layout/fragment_list_page" />
+</navigation>

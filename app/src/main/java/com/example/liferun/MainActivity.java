@@ -24,6 +24,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -42,6 +45,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity  {
             tv_Calories,
             tv_Distance,
             tv_PulseDailyAverage,
-            tv_PulseLastMeasurment;
+            tv_pulseLastMeasurement;
     Button updateInfoButton;
 
     GoogleSignInAccount lastSignedInAccount;
@@ -77,32 +81,50 @@ public class MainActivity extends AppCompatActivity  {
     int pulseDailyAverage;
     int pulseLastMeasurement;
 
+    public static String dailyStepsInfo;
+    public static String dailyCaloriesInfo;
+    public static String dailyDistanceInfo;
+    public static String pulseDailyAverageInfo;
+    public static String pulseLastMeasurementInfo;
+
+    public MainActivity(){
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv_Steps = findViewById(R.id.tv_stepsCount);
-        tv_Calories = findViewById(R.id.tv_caloriesCount);
-        tv_Distance = findViewById(R.id.tv_distanceCount);
-        tv_PulseDailyAverage = findViewById(R.id.tv_pulseDailyAverageCount);
-        tv_PulseLastMeasurment = findViewById(R.id.tv_pulseLastMeasurementCount);
-
-        updateInfoButton = findViewById(R.id.updateInfo_button);
-        updateInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (hasOAuthPermission()) {
-//                    findDataSources();
-                    readData();
-                }
-                else Toast.makeText(MainActivity.this,
-                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
-
         loadData();
+
+        // navigation code:
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+
+//        tv_Steps = findViewById(R.id.tv_stepsCount);
+//        tv_Calories = findViewById(R.id.tv_caloriesCount);
+//        tv_Distance = findViewById(R.id.tv_distanceCount);
+//        tv_PulseDailyAverage = findViewById(R.id.tv_pulseDailyAverageCount);
+//        tv_pulseLastMeasurement = findViewById(R.id.tv_pulseLastMeasurementCount);
+//
+//        updateInfoButton = findViewById(R.id.updateInfo_button);
+//        updateInfoButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (hasOAuthPermission()) {
+////                    findDataSources();
+//                    readData();
+//                }
+//                else Toast.makeText(MainActivity.this,
+//                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
+//                        .show();
+//            }
+//        });
+
+
 
 
 
@@ -134,38 +156,6 @@ public class MainActivity extends AppCompatActivity  {
         super.onStart();
     }
 
-    private void setData() {
-        if (hasOAuthPermission()){
-            if (checkSelfPermission(ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
-                tv_Steps.setText(String.valueOf(dailySteps));
-                tv_Calories.setText(String.valueOf(dailyCalories));
-                tv_Distance.setText(getString(R.string.distanceCount,
-                        String.format(Locale.ENGLISH,"%.2f", dailyDistance)));
-            }
-            else {
-                tv_Steps.setText("???");
-                tv_Calories.setText("???");
-                tv_Distance.setText("???");
-            }
-
-            if (checkSelfPermission(BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
-                tv_PulseDailyAverage.setText(getString(R.string.pulseDailyAverageCount, pulseDailyAverage));
-                tv_PulseLastMeasurment.setText(getString(R.string.pulseLastMeasurementCount, pulseLastMeasurement));
-            }
-            else {
-                tv_PulseDailyAverage.setText("???");
-                tv_PulseLastMeasurment.setText("???");
-            }
-        }
-        else {
-            tv_Steps.setText("???");
-            tv_Calories.setText("???");
-            tv_Distance.setText("???");
-            tv_PulseDailyAverage.setText("???");
-            tv_PulseLastMeasurment.setText("???");
-        }
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -193,6 +183,74 @@ public class MainActivity extends AppCompatActivity  {
         saveData();
     }
 
+    public void setData(){
+        if (hasOAuthPermission()){
+            if (checkSelfPermission(ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
+                dailyStepsInfo = String.valueOf(dailySteps);
+                dailyCaloriesInfo = String.valueOf(dailyCalories);
+                dailyDistanceInfo = getString(R.string.distanceCount,
+                        String.format(Locale.ENGLISH,"%.2f", dailyDistance));
+            }
+            else {
+                dailyStepsInfo = "???";
+                dailyCaloriesInfo = "???";
+                dailyDistanceInfo = "???";
+            }
+
+            if (checkSelfPermission(BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
+                pulseDailyAverageInfo = getString(R.string.pulseDailyAverageCount, pulseDailyAverage);
+                pulseLastMeasurementInfo = getString(R.string.pulseLastMeasurementCount, pulseLastMeasurement);
+            }
+            else {
+                pulseDailyAverageInfo = "???";
+                pulseLastMeasurementInfo = "???";
+            }
+        }
+        else {
+            dailyStepsInfo = "???";
+            dailyCaloriesInfo = "???";
+            dailyDistanceInfo = "???";
+            pulseDailyAverageInfo = "???";
+            pulseLastMeasurementInfo = "???";
+        }
+        MainPage.displayData();
+
+    }
+
+//    private void setData() {
+//        if (hasOAuthPermission()){
+//            if (checkSelfPermission(ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
+//                tv_Steps.setText(String.valueOf(dailySteps));
+//                tv_Calories.setText(String.valueOf(dailyCalories));
+//                tv_Distance.setText(getString(R.string.distanceCount,
+//                        String.format(Locale.ENGLISH,"%.2f", dailyDistance)));
+//            }
+//            else {
+//                tv_Steps.setText("???");
+//                tv_Calories.setText("???");
+//                tv_Distance.setText("???");
+//            }
+//
+//            if (checkSelfPermission(BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
+//                tv_PulseDailyAverage.setText(getString(R.string.pulseDailyAverageCount, pulseDailyAverage));
+//                tv_pulseLastMeasurement.setText(getString(R.string.pulseLastMeasurementCount, pulseLastMeasurement));
+//            }
+//            else {
+//                tv_PulseDailyAverage.setText("???");
+//                tv_pulseLastMeasurement.setText("???");
+//            }
+//        }
+//        else {
+//            tv_Steps.setText("???");
+//            tv_Calories.setText("???");
+//            tv_Distance.setText("???");
+//            tv_PulseDailyAverage.setText("???");
+//            tv_pulseLastMeasurement.setText("???");
+//        }
+//    }
+
+
+
     public void saveData(){
         if (hasOAuthPermission())
             readData();
@@ -204,6 +262,13 @@ public class MainActivity extends AppCompatActivity  {
         editor.putFloat("dailyDistance", dailyDistance).apply();
         editor.putInt("pulseDailyAverage", pulseDailyAverage).apply();
         editor.putInt("pulseLastMeasurement", pulseLastMeasurement).apply();
+
+        editor.putString("dailyStepsInfo", dailyStepsInfo).apply();
+        editor.putString("dailyCaloriesInfo", dailyCaloriesInfo).apply();
+        editor.putString("dailyDistanceInfo", dailyDistanceInfo).apply();
+        editor.putString("pulseDailyAverageInfo", pulseDailyAverageInfo).apply();
+        editor.putString("pulseLastMeasurementInfo", pulseLastMeasurementInfo).apply();
+
     }
 
     public void loadData(){
@@ -214,6 +279,13 @@ public class MainActivity extends AppCompatActivity  {
         dailyDistance = prefs.getFloat("dailyDistance", 0);
         pulseDailyAverage = prefs.getInt("pulseDailyAverage", 0);
         pulseLastMeasurement = prefs.getInt("pulseLastMeasurement",0);
+
+        dailyStepsInfo = prefs.getString("dailyStepsInfo",null);
+        dailyCaloriesInfo = prefs.getString("dailyCaloriesInfo",null);
+        dailyDistanceInfo = prefs.getString("dailyDistanceInfo",null);
+        pulseDailyAverageInfo = prefs.getString("pulseDailyAverageInfo",null);
+        pulseLastMeasurementInfo = prefs.getString("pulseLastMeasurementInfo",null);
+
 
         setData();
     }
@@ -334,7 +406,7 @@ public class MainActivity extends AppCompatActivity  {
         getHeartRateData();
 
 
-//        setData();
+        setData();
 
     }
 
@@ -448,9 +520,12 @@ public class MainActivity extends AppCompatActivity  {
                         List<DataPoint> dataPoints = dataSet.getDataPoints();
                         Log.i("Data points: ", String.valueOf(dataPoints));
                         int lastDataPointIndex = dataPoints.size() - 1;
-                        float lastPulseMeasurement = dataPoints.get(lastDataPointIndex).getValue(Field.FIELD_BPM).asFloat();
+                        float lastPulseMeasurement = dataPoints.isEmpty()
+                                ? pulseLastMeasurement
+                                : dataPoints.get(lastDataPointIndex).getValue(Field.FIELD_BPM).asFloat();
                         Log.d("Last pulse measurement: ", String.valueOf(lastPulseMeasurement));
                         pulseLastMeasurement = Math.round(lastPulseMeasurement);
+                        pulseLastMeasurementInfo = getString(R.string.pulseLastMeasurementCount, pulseLastMeasurement);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -474,6 +549,7 @@ public class MainActivity extends AppCompatActivity  {
                         pulseDailyAverage = (total != 0)
                                 ? (Math.round(dataSet.getDataPoints().get(0).getValue(Field.FIELD_AVERAGE).asFloat()))
                                 : 0;
+                        pulseDailyAverageInfo = getString(R.string.pulseDailyAverageCount, pulseDailyAverage);
                         setData();
                     }
                 })
@@ -506,6 +582,7 @@ public class MainActivity extends AppCompatActivity  {
                         dailySteps = (total != 0)
                                 ? dataSet.getDataPoints().get(0).getValue(Field.FIELD_STEPS).asInt()
                                 : 0;
+                        dailyStepsInfo = String.valueOf(dailySteps);
                         setData();
                     }
                 })
@@ -538,6 +615,7 @@ public class MainActivity extends AppCompatActivity  {
                         dailyCalories = (total != 0)
                                 ? Math.round(dataSet.getDataPoints().get(0).getValue(Field.FIELD_CALORIES).asFloat())
                                 : 0;
+                        dailyCaloriesInfo = String.valueOf(dailyCalories);
                         setData();
                     }
                 })
@@ -570,6 +648,8 @@ public class MainActivity extends AppCompatActivity  {
                         dailyDistance = (total != 0)
                                 ? (dataSet.getDataPoints().get(0).getValue(Field.FIELD_DISTANCE).asFloat())/1000
                                 : 0;
+                        dailyDistanceInfo = getString(R.string.distanceCount,
+                                String.format(Locale.ENGLISH,"%.2f", dailyDistance));
                         setData();
                     }
                 })
@@ -717,4 +797,6 @@ public class MainActivity extends AppCompatActivity  {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+
+
 }
