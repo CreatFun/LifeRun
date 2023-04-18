@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "4310052609",
+    "project_id": "liferun",
+    "storage_bucket": "liferun.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4310052609:android:7c88fae0580f818b6ff500",
+        "android_client_info": {
+          "package_name": "com.example.liferun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4310052609-7imjut21prq1ilc32qpffrb69ekdmtrj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.liferun",
+            "certificate_hash": "a0af3a64e60d39a40028fd5fe515e2e659e3d8c3"
+          }
+        },
+        {
+          "client_id": "4310052609-l4lrn7qfpseba5ibbhi5j7k32aff5b5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKwlEQCnrzPwZ-0_jPCLsbNzvIjOdpUAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4310052609-l4lrn7qfpseba5ibbhi5j7k32aff5b5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
