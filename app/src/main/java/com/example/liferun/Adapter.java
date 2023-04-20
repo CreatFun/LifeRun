@@ -2,7 +2,6 @@ package com.example.liferun;
 
 import android.app.Activity;
 import android.graphics.Paint;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +135,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
         public void bind(Note note){
             this.note = note;
 
-            noteText.setText(note.text);
+            noteText.setText(note.noteName);
             updateStrokeOut();
 
             silentUpdate = true;

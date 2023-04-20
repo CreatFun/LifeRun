@@ -15,11 +15,17 @@ public class Note implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     public int uid;
 
-    @ColumnInfo(name = "text")
-    public String text;
+    @ColumnInfo(name = "noteName")
+    public String noteName;
+
+    @ColumnInfo(name = "noteDescription")
+    public String noteDescription;
 
     @ColumnInfo(name = "timestamp")
     public long timestamp;
+
+    @ColumnInfo(name = "deadlineDate")
+    public long deadlineDate;
 
     @ColumnInfo(name = "done")
     public boolean done;
@@ -30,8 +36,10 @@ public class Note implements Parcelable {
 
     protected Note(Parcel in) {
         uid = in.readInt();
-        text = in.readString();
+        noteName = in.readString();
+        noteDescription = in.readString();
         timestamp = in.readLong();
+        deadlineDate = in.readLong();
         done = in.readByte() != 0;
     }
 
@@ -52,12 +60,12 @@ public class Note implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note = (Note) o;
-        return uid == note.uid && timestamp == note.timestamp && done == note.done && Objects.equals(text, note.text);
+        return uid == note.uid && timestamp == note.timestamp && deadlineDate == note.deadlineDate && done == note.done && Objects.equals(noteName, note.noteName) && Objects.equals(noteDescription, note.noteDescription);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uid, text, timestamp, done);
+        return Objects.hash(uid, noteName, noteDescription, timestamp, deadlineDate, done);
     }
 
     @Override
@@ -68,8 +76,10 @@ public class Note implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeInt(uid);
-        parcel.writeString(text);
+        parcel.writeString(noteName);
+        parcel.writeString(noteDescription);
         parcel.writeLong(timestamp);
+        parcel.writeLong(deadlineDate);
         parcel.writeByte((byte) (done ? 1 : 0));
     }
 }
