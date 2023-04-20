@@ -71,6 +71,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
                     }
 
                 }
+                finish();
             }
         });
 

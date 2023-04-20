@@ -8,23 +8,25 @@
     android:paddingRight="16dp"
     android:gravity="center">
 
-
-    <TextView
-        android:id="@+id/note_text"
-        android:textColor="@color/black"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:minHeight="64dp"
-        android:layout_gravity="center_vertical"
-        tools:text="some text for testing"
-        />
     <CheckBox
         android:id="@+id/completed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Выполнено"
+        android:text=""
         android:layout_marginLeft="8dp"/>
+    <TextView
+        android:id="@+id/note_text"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="60sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="18sp"
+        tools:text="some text for testing"
+        />
+
 
     <ImageView
         android:id="@+id/delete"
