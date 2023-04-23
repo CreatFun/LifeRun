@@ -1,6 +1,7 @@
 package com.example.liferun;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.SortedList;
 
 import com.example.liferun.model.Note;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
@@ -32,6 +34,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
                 }
                 if (o2.done && !o1.done) {
                     return -1;
+                }
+                if (o2.deadlineDate<o1.deadlineDate){
+                    return -1;
+                }
+                if (o2.deadlineDate>o1.deadlineDate){
+                    return 1;
                 }
                 return (int) (o2.timestamp - o1.timestamp);
             }
@@ -137,6 +145,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
 
             noteText.setText(note.noteName);
             updateStrokeOut();
+            updateTextColor();
 
             silentUpdate = true;
             completed.setChecked(note.done);
@@ -146,11 +155,34 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
         private void updateStrokeOut(){
             if (note.done){
                 noteText.setPaintFlags(noteText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                updateTextColor();
             }
             else {
                 noteText.setPaintFlags(noteText.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                updateTextColor();
 
             }
+        }
+
+        private void updateTextColor(){
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DATE);
+            cal.set(year,month,day,0,0,0);
+            long currentTime = cal.getTimeInMillis();
+            if (note.done){
+                noteText.setTextColor(Color.LTGRAY);
+            }
+            else{
+                if (note.deadlineDate != 0L & note.deadlineDate < currentTime){
+                    noteText.setTextColor(Color.RED);
+                }
+                else{
+                    noteText.setTextColor(Color.BLACK);
+                }
+            }
+
         }
     }
 }

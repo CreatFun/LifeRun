@@ -52,7 +52,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
             Calendar cal = Calendar.getInstance();
-            cal.set(year,month,day,0,0,0);
+            cal.set(year,month,day,23,59,59);
             note.deadlineDate = cal.getTimeInMillis();
 
             pickDateButton.setText(String.format(Locale.getDefault(),"%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)));
@@ -87,10 +87,12 @@ public class NoteDetailsActivity extends AppCompatActivity {
             noteName.setText(note.noteName);
             noteDescription.setText(note.noteDescription);
 
-            Calendar cal = Calendar.getInstance();
-            cal.setTimeInMillis(note.deadlineDate);
-            String dateButtonText = String.format(Locale.getDefault(),"%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
-            pickDateButton.setText(dateButtonText);
+            if (note.deadlineDate != 0L) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(note.deadlineDate);
+                String dateButtonText = String.format(Locale.getDefault(), "%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
+                pickDateButton.setText(dateButtonText);
+            }
         }
         else {
             note = new Note();
