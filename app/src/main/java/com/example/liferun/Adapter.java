@@ -17,6 +17,7 @@ import com.example.liferun.model.Note;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.annotations.NonNull;
 
@@ -99,7 +100,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
     }
 
     static class NoteViewHolder extends RecyclerView.ViewHolder{
-        TextView noteText;
+        TextView noteText, noteDeadline;
         CheckBox completed;
         View delete;
 
@@ -111,6 +112,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
         public NoteViewHolder(@NonNull View itemView){
             super(itemView);
             noteText = itemView.findViewById(R.id.note_text);
+            noteDeadline = itemView.findViewById(R.id.note_deadline);
             completed = itemView.findViewById(R.id.completed);
             delete = itemView.findViewById(R.id.delete);
 
@@ -144,8 +146,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
             this.note = note;
 
             noteText.setText(note.noteName);
-            updateStrokeOut();
-            updateTextColor();
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(note.deadlineDate);
+            int day = cal.get(Calendar.DATE);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+
+            if (note.deadlineDate != 0L){
+                noteDeadline.setText(String.format(Locale.ENGLISH, "%1$d.%2$d.%3$d", day, month, year));
+                updateStrokeOut();
+                updateTextColor();
+            }
+
 
             silentUpdate = true;
             completed.setChecked(note.done);

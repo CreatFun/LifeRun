@@ -27,6 +27,15 @@
         tools:text="some text for testing"
         />
 
+    <TextView
+        android:id="@+id/note_deadline"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="23.04.2023"
+        />
+
 
     <ImageView
         android:id="@+id/delete"
