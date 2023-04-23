@@ -36,11 +36,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
                 if (o2.done && !o1.done) {
                     return -1;
                 }
-                if (o2.deadlineDate<o1.deadlineDate){
+                if (o2.deadlineDate == 0L & o1.deadlineDate != 0L){
                     return -1;
                 }
-                if (o2.deadlineDate>o1.deadlineDate){
+                if (o2.deadlineDate != 0L & o1.deadlineDate == 0L){
                     return 1;
+                }
+                if (o2.deadlineDate<o1.deadlineDate){
+                    return 1;
+                }
+                if (o2.deadlineDate>o1.deadlineDate){
+                    return -1;
                 }
                 return (int) (o2.timestamp - o1.timestamp);
             }
@@ -158,6 +164,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
                 updateStrokeOut();
                 updateTextColor();
             }
+            else noteDeadline.setText("");
 
 
             silentUpdate = true;
