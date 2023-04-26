@@ -11,5 +11,8 @@
     <string name="distanceCount">%1$s км</string>
     <string name="pulseDailyAverageCount">%1$d bpm</string>
     <string name="pulseLastMeasurementCount">%1$d bpm</string>
+    <string name="previousMonthButton"><![CDATA[<-]]></string>
+    <string name="nextMonthButton"><![CDATA[->]]></string>
+
 
 </resources>
