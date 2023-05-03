@@ -94,7 +94,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         int daysInMonth = yearMonth.lengthOfMonth();
 
         LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue() - 1;
 
         for(int i = 1; i <= 42; i++)
         {
