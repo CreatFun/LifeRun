@@ -46,6 +46,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
         initWidgets(v);
         selectedDate = LocalDate.now();
+        pickedDate = selectedDate;
         setMonthView(v);
 
 
@@ -118,12 +119,20 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     public void previousMonthAction(View view)
     {
         selectedDate = selectedDate.minusMonths(1);
+        if (selectedDate.equals(LocalDate.now())){
+            pickedDate = selectedDate;
+        }
+        else pickedDate = selectedDate.withDayOfMonth(1);
         setMonthView(view);
     }
 
     public void nextMonthAction(View view)
     {
         selectedDate = selectedDate.plusMonths(1);
+        if (selectedDate.equals(LocalDate.now())){
+            pickedDate = selectedDate;
+        }
+        else pickedDate = selectedDate.withDayOfMonth(1);
         setMonthView(view);
     }
 

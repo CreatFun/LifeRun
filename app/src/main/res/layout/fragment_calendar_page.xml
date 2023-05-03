@@ -1,128 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".ListPage">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addEventButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/previousMonthButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/previousMonthButton"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/monthYearTV"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="Feb 2021"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@color/black"/>
-
-        <Button
-            android:id="@+id/nextMonthButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/nextMonthButton"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
+        android:clickable="true"
+        android:contentDescription="add_event"
+        android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ПН"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
+            <Button
+                android:id="@+id/previousMonthButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="@string/previousMonthButton"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/monthYearTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Feb 2021"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/nextMonthButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="@string/nextMonthButton"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ВТ"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="СР"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ПН"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ЧТ"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ВТ"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ПТ"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="СР"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="СБ"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ЧТ"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ВС"
-            android:textColor="@color/black"
-            android:textAlignment="center"
-            android:textSize="16sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ПТ"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="СБ"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ВС"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendarRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
