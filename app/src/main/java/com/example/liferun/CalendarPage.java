@@ -23,7 +23,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    private LocalDate selectedDate;
+    public static LocalDate selectedDate;
 
     private Button previousMonth, nextMonth;
 

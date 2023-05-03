@@ -1,5 +1,7 @@
 package com.example.liferun;
 
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
@@ -34,7 +38,17 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
-        holder.dayOfMonth.setText(daysOfMonth.get(position));
+        String dayText = daysOfMonth.get(position);
+        holder.dayOfMonth.setText(dayText);
+        if (CalendarPage.selectedDate.equals(LocalDate.now())
+                & dayText.equals(String.valueOf(LocalDate.now().getDayOfMonth()))){
+            holder.dayOfMonth.setTextColor(Color.BLUE);
+            holder.dayOfMonth.setPaintFlags(Paint.FAKE_BOLD_TEXT_FLAG);
+        }
+//        else{
+//            holder.dayOfMonth.setTextColor(Color.BLACK);
+//        }
+
     }
 
     @Override
