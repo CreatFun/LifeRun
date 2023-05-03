@@ -112,8 +112,8 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
     private String monthYearFromDate(LocalDate date)
     {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-        return date.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("LLLL yyyy");
+        return capitalizeFirstLetter(date.format(formatter));
     }
 
     public void previousMonthAction(View view)
@@ -136,5 +136,11 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 //            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
 //            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 //        }
+    }
+
+    public static String capitalizeFirstLetter(String inputString) {
+        char firstLetter = inputString.charAt(0);
+        char capitalFirstLetter = Character.toUpperCase(firstLetter);
+        return inputString.replace(inputString.charAt(0), capitalFirstLetter);
     }
 }
