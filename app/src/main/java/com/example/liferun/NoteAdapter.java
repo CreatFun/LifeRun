@@ -21,11 +21,11 @@ import java.util.Locale;
 
 import io.reactivex.annotations.NonNull;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.NoteViewHolder> {
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     private SortedList<Note> sortedList;
 
-    public Adapter() {
+    public NoteAdapter() {
 
         sortedList = new SortedList<>(Note.class, new SortedList.Callback<Note>() {
             @Override

@@ -5,12 +5,14 @@ import android.app.Application;
 import androidx.room.Room;
 
 import com.example.liferun.data.AppDatabase;
+import com.example.liferun.data.EventDao;
 import com.example.liferun.data.NoteDao;
 
 public class App extends Application {
 
     private AppDatabase database;
     private NoteDao noteDao;
+    private EventDao eventDao;
 
     private static App instance;
 
@@ -30,6 +32,7 @@ public class App extends Application {
                 .build();
 
         noteDao = database.noteDao();
+        eventDao = database.eventDao();
     }
 
     public AppDatabase getDatabase() {
@@ -46,5 +49,13 @@ public class App extends Application {
 
     public void setNoteDao(NoteDao noteDao) {
         this.noteDao = noteDao;
+    }
+
+    public EventDao getEventDao(){
+        return eventDao;
+    }
+
+    public void setEventDao(EventDao eventDao){
+        this.eventDao = eventDao;
     }
 }

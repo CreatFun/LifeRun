@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,7 +49,7 @@ public class ListPage extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        Adapter adapter = new Adapter();
+        NoteAdapter adapter = new NoteAdapter();
         recyclerView.setAdapter(adapter);
 
         addNoteButton = v.findViewById(R.id.addNoteButton);
