@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
-    private final ArrayList<String> daysOfMonth;
+    private final ArrayList<LocalDate> daysOfMonth;
     private final OnItemListener onItemListener;
 
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener)
+    public CalendarAdapter(ArrayList<LocalDate> daysOfMonth, OnItemListener onItemListener)
     {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
@@ -32,22 +31,31 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);
-        return new CalendarViewHolder(view, onItemListener);
+        return new CalendarViewHolder(view, onItemListener, daysOfMonth);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
-        String dayText = daysOfMonth.get(position);
-        holder.dayOfMonth.setText(dayText);
-        if (CalendarPage.selectedDate.equals(LocalDate.now())
-                & dayText.equals(String.valueOf(LocalDate.now().getDayOfMonth()))){
-            holder.dayOfMonth.setTextColor(Color.BLUE);
-            holder.dayOfMonth.setPaintFlags(Paint.FAKE_BOLD_TEXT_FLAG);
-        }
+        LocalDate date = daysOfMonth.get(position);
+        if (date != null){
+            holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+            if (CalendarPage.selectedDate.equals(LocalDate.now())
+                    & date.getDayOfMonth() == LocalDate.now().getDayOfMonth()){
+                holder.dayOfMonth.setTextColor(Color.BLUE);
+                holder.dayOfMonth.setPaintFlags(Paint.FAKE_BOLD_TEXT_FLAG);
+            }
+            if (CalendarPage.pickedDate != null){
+                if (CalendarPage.pickedDate.equals(date)){
+                    holder.calendarCell.setBackgroundColor(Color.LTGRAY);
+                }
+            }
 //        else{
 //            holder.dayOfMonth.setTextColor(Color.BLACK);
 //        }
+        }
+        else holder.dayOfMonth.setText("");
+
 
     }
 
@@ -59,7 +67,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 
     public interface  OnItemListener
     {
-        void onItemClick(int position, String dayText);
+        void onItemClick(int position, LocalDate date);
     }
 }
 

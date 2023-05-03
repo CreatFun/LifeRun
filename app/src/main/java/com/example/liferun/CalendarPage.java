@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -23,7 +22,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-    public static LocalDate selectedDate;
+    public static LocalDate selectedDate, pickedDate;
 
     private Button previousMonth, nextMonth;
 
@@ -78,7 +77,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     private void setMonthView(View v)
     {
         monthYearText.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
@@ -86,9 +85,9 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-    private ArrayList<String> daysInMonthArray(LocalDate date)
+    private ArrayList<LocalDate> daysInMonthArray(LocalDate date)
     {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
         int daysInMonth = yearMonth.lengthOfMonth();
@@ -100,11 +99,11 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         {
             if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
             {
-                daysInMonthArray.add("");
+                daysInMonthArray.add(null);
             }
             else
             {
-                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(), selectedDate.getMonth(), i - dayOfWeek));
             }
         }
         return  daysInMonthArray;
@@ -129,13 +128,18 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     }
 
     @Override
-    public void onItemClick(int position, String dayText)
+    public void onItemClick(int position, LocalDate date)
     {
-//        if(!dayText.equals(""))
-//        {
-//            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-//            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//        }
+        if (date != null){
+            pickedDate = date;
+            monthYearText.setText(monthYearFromDate(selectedDate));
+            ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
+
+            CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
+            calendarRecyclerView.setLayoutManager(layoutManager);
+            calendarRecyclerView.setAdapter(calendarAdapter);
+        }
     }
 
     public static String capitalizeFirstLetter(String inputString) {
