@@ -1,5 +1,6 @@
 package com.example.liferun;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -20,11 +24,15 @@ import java.util.ArrayList;
 
 public class CalendarPage extends Fragment implements CalendarAdapter.OnItemListener {
 
+    PopupWindow popupWindow;
+
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate, pickedDate;
 
     private Button previousMonth, nextMonth;
+
+    FloatingActionButton addEventButton;
 
 
 
@@ -48,6 +56,14 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         selectedDate = LocalDate.now();
         pickedDate = selectedDate;
         setMonthView(v);
+
+        addEventButton = v.findViewById(R.id.addEventButton_page);
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add event adding
+            }
+        });
 
 
         return v;
@@ -148,6 +164,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);
+            startEventPopup();
         }
     }
 
@@ -155,5 +172,14 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         char firstLetter = inputString.charAt(0);
         char capitalFirstLetter = Character.toUpperCase(firstLetter);
         return inputString.replace(inputString.charAt(0), capitalFirstLetter);
+    }
+
+    public void showEvents(){
+
+    }
+
+    public void startEventPopup(){
+        Intent intent = new Intent(getActivity(), EventPopup.class);
+        startActivity(intent);
     }
 }

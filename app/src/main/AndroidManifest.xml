@@ -33,6 +33,7 @@
         </activity>
         <activity
             android:name=".NoteDetailsActivity"/>
+        <activity android:name=".EventPopup"/>
     </application>
 
 </manifest>
