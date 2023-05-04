@@ -61,7 +61,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add event adding
+                EventDetailsActivity.startEventDetailsActivity(getActivity(),null);
             }
         });
 
@@ -179,7 +179,9 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     }
 
     public void startEventPopup(){
-        Intent intent = new Intent(getActivity(), EventPopup.class);
-        startActivity(intent);
+        PopupWindow eventsPopupWindow = new PopupWindow(getContext());
+        View eventsPopupView = getLayoutInflater().inflate(R.layout.popup_events, null);
+        eventsPopupWindow.setContentView(eventsPopupView);
+        eventsPopupWindow.showAtLocation(getView(),1,0,0);
     }
 }
