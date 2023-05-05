@@ -25,7 +25,7 @@ public class EventPopup extends AppCompatActivity {
 
     TextView date;
     private RecyclerView recyclerView;
-    FloatingActionButton addNoteButton;
+    FloatingActionButton addEventButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,11 +45,11 @@ public class EventPopup extends AppCompatActivity {
         EventAdapter adapter = new EventAdapter();
         recyclerView.setAdapter(adapter);
 
-        addNoteButton = findViewById(R.id.addEventButton_popup);
-        addNoteButton.setOnClickListener(new View.OnClickListener() {
+        addEventButton = findViewById(R.id.addEventButton_popup);
+        addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: open new event activity
+                EventDetailsActivity.startEventDetailsActivity(getParent(),null);
             }
         });
 
