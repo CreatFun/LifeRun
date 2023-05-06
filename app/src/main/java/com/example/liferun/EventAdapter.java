@@ -1,5 +1,6 @@
 package com.example.liferun;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.SortedList;
 import com.example.liferun.model.Event;
 import com.example.liferun.model.Note;
 
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
@@ -61,7 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new EventAdapter.EventViewHolder(
+        return new EventViewHolder(
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event, parent, false));
     }
 
@@ -76,7 +79,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     public void setItems(List<Event> events){
-        sortedList.replaceAll(events);
+        long currentDate = CalendarPage.pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
+        sortedList.clear();
+        for (Event event:
+             events) {
+            long eventDate = event.date;
+            if (eventDate == currentDate){
+                sortedList.add(event);
+            }
+        }
+//        sortedList.replaceAll(events);
     }
 
     static class EventViewHolder extends RecyclerView.ViewHolder{
@@ -94,7 +106,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO: open event details activity
+                    EventDetailsActivity.startEventDetailsActivity((Activity) itemView.getContext(),event);
                 }
             });
         }

@@ -19,6 +19,7 @@ import com.example.liferun.model.Event;
 import com.example.liferun.model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class EventPopup extends AppCompatActivity {
@@ -32,6 +33,17 @@ public class EventPopup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_events);
 
+        updateEventsList();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void updateEventsList() {
         date = findViewById(R.id.date);
         String dateText;
         dateText = String.valueOf(CalendarPage.pickedDate.getDayOfMonth())+CalendarPage.pickedDate.getMonth();
@@ -49,7 +61,7 @@ public class EventPopup extends AppCompatActivity {
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventDetailsActivity.startEventDetailsActivity(getParent(),null);
+                EventDetailsActivity.startEventDetailsActivity(EventPopup.this,null);
             }
         });
 
@@ -60,7 +72,12 @@ public class EventPopup extends AppCompatActivity {
                 adapter.setItems(events);
             }
         });
+    }
 
+    public static void startEventPopupActivity(Activity caller){
+        Intent intent = new Intent(caller, EventPopup.class);
+
+        caller.startActivity(intent);
     }
 
 

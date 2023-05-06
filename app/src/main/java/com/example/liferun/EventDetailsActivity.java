@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.example.liferun.model.Event;
 import com.example.liferun.model.Note;
 
+import java.time.ZoneId;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalField;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -64,6 +67,7 @@ public class EventDetailsActivity extends AppCompatActivity {
                 if (eventName.getText().length() > 0){
                     event.eventName = eventName.getText().toString();
                     event.eventDescription = eventDescription.getText().toString();
+                    event.date = CalendarPage.pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
                     if (getIntent().hasExtra(EXTRA_EVENT)){
                         App.getInstance().getEventDao().update(event);
                     }

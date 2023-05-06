@@ -179,9 +179,10 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     }
 
     public void startEventPopup(){
-        PopupWindow eventsPopupWindow = new PopupWindow(getContext());
-        View eventsPopupView = getLayoutInflater().inflate(R.layout.popup_events, null);
-        eventsPopupWindow.setContentView(eventsPopupView);
-        eventsPopupWindow.showAtLocation(getView(),1,0,0);
+        EventPopup.startEventPopupActivity(getActivity());
+//        PopupWindow eventsPopupWindow = new PopupWindow(getContext());
+//        View eventsPopupView = getLayoutInflater().inflate(R.layout.popup_events, null);
+//        eventsPopupWindow.setContentView(eventsPopupView);
+//        eventsPopupWindow.showAtLocation(getView(),1,0,0);
     }
 }
