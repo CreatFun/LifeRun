@@ -1,6 +1,5 @@
 package com.example.liferun;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -157,6 +156,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     {
         if (date != null){
             pickedDate = date;
+            // обновление календаря, обновление выделения клетки
             monthYearText.setText(monthYearFromDate(selectedDate));
             ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
 
@@ -164,6 +164,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);
+            //
             startEventPopup();
         }
     }
@@ -174,9 +175,6 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         return inputString.replace(inputString.charAt(0), capitalFirstLetter);
     }
 
-    public void showEvents(){
-
-    }
 
     public void startEventPopup(){
         EventPopup.startEventPopupActivity(getActivity());

@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -16,10 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liferun.model.Event;
-import com.example.liferun.model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class EventPopup extends AppCompatActivity {
@@ -28,6 +25,8 @@ public class EventPopup extends AppCompatActivity {
     private RecyclerView recyclerView;
     FloatingActionButton addEventButton;
 
+    boolean isUpdated = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +34,16 @@ public class EventPopup extends AppCompatActivity {
 
         updateEventsList();
 
+
     }
+
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        // заставляет снова обновить список, например после добавления новой заметки
+        isUpdated = false;
 
     }
 
@@ -70,6 +74,12 @@ public class EventPopup extends AppCompatActivity {
             @Override
             public void onChanged(List<Event> events) {
                 adapter.setItems(events);
+                // повторно обновляет страницу, чтобы список отобразился сразу
+                if (!isUpdated){
+                    updateEventsList();
+                    isUpdated = true;
+                }
+                //
             }
         });
     }
