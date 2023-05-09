@@ -3,6 +3,8 @@ package com.example.liferun;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,12 +15,15 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.liferun.model.Event;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CalendarPage extends Fragment implements CalendarAdapter.OnItemListener {
@@ -32,6 +37,8 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     private Button previousMonth, nextMonth;
 
     FloatingActionButton addEventButton;
+
+    List<Event> events;
 
 
 
@@ -63,6 +70,15 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
                 EventDetailsActivity.startEventDetailsActivity(getActivity(),null);
             }
         });
+
+        MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mainViewModel.getEventLiveData().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
+            @Override
+            public void onChanged(List<Event> events) {
+
+            }
+        });
+        events = mainViewModel.getEventLiveData().getValue();
 
 
         return v;
@@ -165,7 +181,17 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);
             //
-            startEventPopup();
+
+            MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+            events = mainViewModel.getEventLiveData().getValue();
+            for (Event event:
+                    events) {
+                long eventDate = event.date;
+                if (eventDate == pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()){
+                    startEventPopup();
+                    break;
+                }
+            }
         }
     }
 
