@@ -30,7 +30,7 @@
         android:gravity="top"
         android:layout_marginTop="10sp"
         android:padding="16sp"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences|textMultiLine"/>
 
     <Button
         android:id="@+id/pickDateButton"
