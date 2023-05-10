@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".EventDetailsActivity">
 
     <LinearLayout
@@ -15,6 +16,7 @@
 
         <TextView
             android:id="@+id/createEdit_text"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Создание события"
@@ -23,6 +25,9 @@
 
         <EditText
             android:id="@+id/eventName"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="30sp"
@@ -32,6 +37,9 @@
 
         <EditText
             android:id="@+id/eventDescription"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="100sp"
