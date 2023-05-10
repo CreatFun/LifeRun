@@ -55,7 +55,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
             cal.set(year,month,day,23,59,59);
             note.deadlineDate = cal.getTimeInMillis();
 
-            pickDateButton.setText(String.format(Locale.getDefault(),"%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)));
+            pickDateButton.setText(String.format(Locale.getDefault(),"%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())));
         }
 
 
