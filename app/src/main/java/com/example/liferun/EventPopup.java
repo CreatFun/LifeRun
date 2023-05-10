@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.liferun.model.Event;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class EventPopup extends AppCompatActivity {
@@ -53,7 +54,9 @@ public class EventPopup extends AppCompatActivity {
     private void updateEventsList() {
         date = findViewById(R.id.date);
         String dateText;
-        dateText = String.valueOf(CalendarPage.pickedDate.getDayOfMonth())+CalendarPage.pickedDate.getMonth();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM");
+        dateText = CalendarPage.pickedDate.format(formatter);
+//        dateText = String.valueOf(CalendarPage.pickedDate.getDayOfMonth())+CalendarPage.pickedDate.getMonth();
         date.setText(dateText);
 
         recyclerView = findViewById(R.id.eventsList);
