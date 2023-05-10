@@ -15,13 +15,24 @@
         android:layout_marginBottom="100sp">
 
         <TextView
+            android:id="@+id/eventDate_text"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Среда, 10 мая"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+
+        <TextView
             android:id="@+id/createEdit_text"
             android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Создание события"
             android:textSize="30sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_marginTop="30sp"/>
 
         <EditText
             android:id="@+id/eventName"

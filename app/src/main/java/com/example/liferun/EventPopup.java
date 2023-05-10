@@ -54,7 +54,7 @@ public class EventPopup extends AppCompatActivity {
     private void updateEventsList() {
         date = findViewById(R.id.date);
         String dateText;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
         dateText = CalendarPage.pickedDate.format(formatter);
 //        dateText = String.valueOf(CalendarPage.pickedDate.getDayOfMonth())+CalendarPage.pickedDate.getMonth();
         date.setText(dateText);

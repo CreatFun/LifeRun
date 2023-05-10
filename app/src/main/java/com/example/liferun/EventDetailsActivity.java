@@ -14,6 +14,7 @@ import com.example.liferun.model.Event;
 import com.example.liferun.model.Note;
 
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalField;
 import java.util.Calendar;
@@ -29,7 +30,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     Button saveEventButton, cancelButton;
 
     private EditText eventName, eventDescription;
-    private TextView createEdit_text;
+    private TextView createEdit_text, eventDate_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,14 @@ public class EventDetailsActivity extends AppCompatActivity {
         eventName = findViewById(R.id.eventName);
         eventDescription = findViewById(R.id.eventDescription);
         createEdit_text = findViewById(R.id.createEdit_text);
+        eventDate_text = findViewById(R.id.eventDate_text);
         saveEventButton = findViewById(R.id.saveEventButton);
         cancelButton = findViewById(R.id.cancelButton);
+
+        String dateText;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
+        dateText = CalendarPage.pickedDate.format(formatter);
+        eventDate_text.setText(CalendarPage.capitalizeFirstLetter(dateText));
 
 
         if (getIntent().hasExtra(EXTRA_EVENT)){
