@@ -35,7 +35,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NoteDetailsActivity" />
-        <activity android:name=".EventPopup" />
+        <activity android:name=".EventPopup"
+            android:theme="@style/Theme.Popup"/>
     </application>
 
 </manifest>
