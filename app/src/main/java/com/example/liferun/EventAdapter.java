@@ -100,7 +100,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            eventTime = itemView.findViewById(R.id.event_time);
             eventName = itemView.findViewById(R.id.event_name);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -115,8 +114,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             this.event = event;
 
             eventName.setText(event.eventName);
-            //TODO: set event time
-            eventTime.setText("00:00");
         }
     }
 }

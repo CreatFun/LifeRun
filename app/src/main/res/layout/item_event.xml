@@ -8,17 +8,7 @@
     android:paddingRight="16dp"
     android:gravity="center">
 
-    <TextView
-        android:id="@+id/event_time"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="10:00"
-        android:gravity="center|start"
-        android:paddingStart="10sp"
-        android:paddingEnd="10sp"
-        />
+
 
     <TextView
         android:id="@+id/event_name"
