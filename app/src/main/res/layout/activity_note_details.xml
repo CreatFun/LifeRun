@@ -16,7 +16,8 @@
         android:minHeight="30sp"
         android:gravity="top"
         android:layout_marginTop="100sp"
-        android:padding="16sp"/>
+        android:padding="16sp"
+        android:inputType="textCapSentences"/>
     <EditText
         android:id="@+id/noteDescription"
         android:textColor="@color/black"
@@ -28,7 +29,8 @@
         android:minHeight="100sp"
         android:gravity="top"
         android:layout_marginTop="10sp"
-        android:padding="16sp"/>
+        android:padding="16sp"
+        android:inputType="textCapSentences"/>
 
     <Button
         android:id="@+id/pickDateButton"
