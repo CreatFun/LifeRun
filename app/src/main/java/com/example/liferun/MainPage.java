@@ -49,17 +49,17 @@ public class MainPage extends Fragment {
         tv_Steps = v.findViewById(R.id.tv_stepsCount);
         tv_Calories = v.findViewById(R.id.tv_caloriesCount);
         tv_Distance = v.findViewById(R.id.tv_distanceCount);
-        tv_PulseDailyAverage = v.findViewById(R.id.tv_pulseDailyAverageCount);
-        tv_pulseLastMeasurement = v.findViewById(R.id.tv_pulseLastMeasurementCount);
+//        tv_PulseDailyAverage = v.findViewById(R.id.tv_pulseDailyAverageCount);
+//        tv_pulseLastMeasurement = v.findViewById(R.id.tv_pulseLastMeasurementCount);
 
-        updateInfoButton = v.findViewById(R.id.updateInfo_button);
-
-        updateInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                displayData();
-            }
-        });
+//        updateInfoButton = v.findViewById(R.id.updateInfo_button);
+//
+//        updateInfoButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                displayData();
+//            }
+//        });
 
 
 
@@ -115,8 +115,8 @@ public class MainPage extends Fragment {
         tv_Steps.setText(MainActivity.dailyStepsInfo);
         tv_Calories.setText(MainActivity.dailyCaloriesInfo);
         tv_Distance.setText(MainActivity.dailyDistanceInfo);
-        tv_PulseDailyAverage.setText(MainActivity.pulseDailyAverageInfo);
-        tv_pulseLastMeasurement.setText(MainActivity.pulseLastMeasurementInfo);
+//        tv_PulseDailyAverage.setText(MainActivity.pulseDailyAverageInfo);
+//        tv_pulseLastMeasurement.setText(MainActivity.pulseLastMeasurementInfo);
     }
 
 }
