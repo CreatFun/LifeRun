@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:background="#3B708D"
         app:itemTextColor="#FFFFFF"
-        app:itemRippleColor="#0070A3"
+        app:itemRippleColor="#FFFFFF"
         app:itemIconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
