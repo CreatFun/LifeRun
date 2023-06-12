@@ -81,7 +81,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         pickDateButton = findViewById(R.id.pickDateButton);
         saveNoteButton = findViewById(R.id.saveNoteButton);
         backButton = findViewById(R.id.backButton);
-
+        //TODO: обработать поле создание/редактирование задачи
         if (getIntent().hasExtra(EXTRA_NOTE)){
             note = getIntent().getParcelableExtra(EXTRA_NOTE);
             noteName.setText(note.noteName);

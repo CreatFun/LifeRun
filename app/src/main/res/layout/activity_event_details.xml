@@ -1,91 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".EventDetailsActivity">
+    android:background="#E6ECFE"
+    android:orientation="vertical">
 
+
+    <!--   App bar     -->
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100sp"
-        android:layout_marginBottom="100sp">
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
 
-        <TextView
-            android:id="@+id/eventDate_text"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Среда, 10 мая"
-            android:textSize="20sp"
-            android:gravity="center"
-            />
+        <!--    Settings icon        -->
+        <ImageView
+            android:id="@+id/settings_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:onClick="startSettingsActivity"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/settings_icon"
+            app:srcCompat="@drawable/settings_icon" />
 
-        <TextView
-            android:id="@+id/createEdit_text"
-            android:textColor="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Создание события"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:layout_marginTop="30sp"/>
-
-        <EditText
-            android:id="@+id/eventName"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="30sp"
-            android:hint="Название"
-            android:layout_marginTop="20sp"
-            android:padding="16sp"
-            android:inputType="textCapSentences"/>
-
-        <EditText
-            android:id="@+id/eventDescription"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="100sp"
-            android:hint="Описание"
-            android:layout_marginTop="20sp"
-            android:padding="16sp"
-            android:inputType="textCapSentences|textMultiLine"/>
-
+        <!--    Name and date        -->
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:gravity="center"
+            android:id="@+id/linearLayout"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginStart="60dp"
             >
 
-            <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Отмена"
-                android:layout_marginEnd="20sp" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:text="Имя"
+                android:textAlignment="center"
+                android:textColor="#343434"
+                android:textSize="15sp" />
 
-            <Button
-                android:id="@+id/saveEventButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Сохранить"
-                android:layout_marginStart="20sp"/>
+            <LinearLayout
+                android:layout_width="130dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="XXXX"
+                    android:textAlignment="center"
+                    android:textColor="#343434"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="XX.XX"
+                    android:textAlignment="center"
+                    android:textColor="#343434"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+            </LinearLayout>
         </LinearLayout>
+
+        <!--  Battery status  -->
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginStart="35dp"
+            >
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/battery_icon"
+                tools:layout_editor_absoluteX="287dp" />
+
+            <TextView
+                android:id="@+id/tv_batteryCharge"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:paddingStart="1dp"
+                android:paddingEnd="10dp"
+                android:text="0%"
+                android:textColor="#343434"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/eventDate_text"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Среда, 10 мая"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        />
+
+    <TextView
+        android:id="@+id/createEdit_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Создание события"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#343434"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/eventName"
+        android:textColor="@color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Название"
+        android:minHeight="30dp"
+        android:gravity="top"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="16dp"
+        android:inputType="textCapSentences"
+        android:background="@drawable/custom_edittext"
+        />
+
+    <EditText
+        android:id="@+id/eventDescription"
+        android:textColor="@color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Описание"
+        android:minHeight="100dp"
+        android:gravity="top"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:padding="16dp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:background="@drawable/custom_edittext"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/pickDateButton"
+            android:layout_width="275dp"
+            android:layout_height="60dp"
+            android:text="Дата"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/btn_color"
+            />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/bell_icon"
+            android:layout_gravity="center"
+            android:layout_marginLeft="45dp"/>
 
 
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Отмена"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            />
+
+        <Button
+            android:id="@+id/saveEventButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Создать"
+            android:background="@drawable/custom_button"
+            app:backgroundTint="@null"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+<!--    <LinearLayout-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginTop="100sp"-->
+<!--        android:layout_marginBottom="100sp">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/eventDate_text"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Среда, 10 мая"-->
+<!--            android:textSize="20sp"-->
+<!--            android:gravity="center"-->
+<!--            />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/createEdit_text"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Создание события"-->
+<!--            android:textSize="30sp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_marginTop="30sp"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/eventName"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black"-->
+<!--            android:backgroundTint="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:minHeight="30sp"-->
+<!--            android:hint="Название"-->
+<!--            android:layout_marginTop="20sp"-->
+<!--            android:padding="16sp"-->
+<!--            android:inputType="textCapSentences"/>-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/eventDescription"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/black"-->
+<!--            android:backgroundTint="@color/black"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:minHeight="100sp"-->
+<!--            android:hint="Описание"-->
+<!--            android:layout_marginTop="20sp"-->
+<!--            android:padding="16sp"-->
+<!--            android:inputType="textCapSentences|textMultiLine"/>-->
+
+<!--        <LinearLayout-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20sp"-->
+<!--            android:gravity="center"-->
+<!--            >-->
+
+<!--            <Button-->
+<!--                android:id="@+id/cancelButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Отмена"-->
+<!--                android:layout_marginEnd="20sp" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/saveEventButton"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Сохранить"-->
+<!--                android:layout_marginStart="20sp"/>-->
+
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+
+</LinearLayout>
