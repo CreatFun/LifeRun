@@ -140,8 +140,8 @@
         android:minHeight="30dp"
         android:gravity="top"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:padding="16dp"
         android:inputType="textCapSentences"
         android:background="@drawable/custom_edittext"
@@ -156,8 +156,8 @@
         android:hint="Описание"
         android:minHeight="100dp"
         android:gravity="top"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
         android:padding="16dp"
         android:inputType="textCapSentences|textMultiLine"
@@ -169,8 +169,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="10dp">
 
         <Button
@@ -187,7 +187,7 @@
             android:layout_height="60dp"
             android:src="@drawable/bell_icon"
             android:layout_gravity="center"
-            android:layout_marginLeft="45dp"/>
+            android:layout_marginStart="18dp"/>
 
 
 
@@ -197,8 +197,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="20dp"
         >
 
@@ -211,8 +211,8 @@
             android:background="@drawable/custom_button"
             app:backgroundTint="@null"
             android:layout_weight="0.5"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             />
 
         <Button
@@ -224,8 +224,8 @@
             android:background="@drawable/custom_button"
             app:backgroundTint="@null"
             android:layout_weight="0.5"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="30dp"
             />
 
 

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate, pickedDate;
 
-    private Button previousMonth, nextMonth;
+    private ImageButton previousMonth, nextMonth;
 
     FloatingActionButton addEventButton;
 
