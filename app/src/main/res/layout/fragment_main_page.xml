@@ -99,7 +99,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_hoursCount"
+                android:id="@+id/tv_sumSleepDuration"
                 android:layout_width="70dp"
                 android:layout_height="41dp"
                 android:text="XX"
@@ -171,7 +171,7 @@
                     android:textSize="15sp"/>
                 
                 <TextView
-                    android:id="@+id/tv_deepSleepCount"
+                    android:id="@+id/tv_deepSleepDuration"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:paddingStart="10dp"
@@ -201,7 +201,7 @@
                     android:textSize="15sp"/>
 
                 <TextView
-                    android:id="@+id/lightSleepCount"
+                    android:id="@+id/tv_lightSleepDuration"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:paddingStart="10dp"
@@ -230,7 +230,7 @@
                     android:textSize="15sp"/>
 
                 <TextView
-                    android:id="@+id/awakeCount"
+                    android:id="@+id/tv_awakeDuration"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:paddingStart="10dp"
@@ -292,7 +292,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@id/tv_stepsCount"
+                        android:id="@+id/tv_stepsCountGeneral"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:textAlignment="center"
@@ -305,7 +305,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:textAlignment="center"
-                        android:gravity="top"
+                        android:gravity="center_horizontal"
                         android:text="Шаги"
                         android:textColor="#343434"
                         android:textSize="18sp"/>
@@ -333,7 +333,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:textAlignment="center"
-                        android:gravity="top"
+                        android:gravity="center_horizontal"
                         android:text="Расстояние"
                         android:textColor="#343434"
                         android:textSize="18sp"/>
@@ -348,7 +348,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@id/tv_caloriesCount"
+                        android:id="@+id/tv_caloriesCountGeneral"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:textAlignment="center"
@@ -361,7 +361,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:textAlignment="center"
-                        android:gravity="top"
+                        android:gravity="center_horizontal"
                         android:text="Калории"
                         android:textColor="#343434"
                         android:textSize="18sp"/>
@@ -425,6 +425,7 @@
                         android:src="@drawable/heart_icon"/>
 
                     <TextView
+                        android:id="@+id/tv_pulseLastMeasurementCount"
                         android:layout_width="290dp"
                         android:layout_height="65dp"
                         android:text="XX"

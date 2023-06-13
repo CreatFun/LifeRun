@@ -47,6 +47,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -86,6 +88,16 @@ public class MainActivity extends AppCompatActivity  {
     public static String dailyDistanceInfo;
     public static String pulseDailyAverageInfo;
     public static String pulseLastMeasurementInfo;
+
+    long deepSleepDuration;
+    long lightSleepDuration;
+    long awakeDuration;
+    long sumSleepDuration;
+
+    public static String deepSleepDurationInfo;
+    public static String lightSleepDurationInfo;
+    public static String awakeDurationInfo;
+    public static String sumSleepDurationInfo;
 
     public MainActivity(){
 
@@ -205,6 +217,13 @@ public class MainActivity extends AppCompatActivity  {
                 pulseDailyAverageInfo = "???";
                 pulseLastMeasurementInfo = "???";
             }
+            //TODO: текст сна
+            // Форматируем продолжительность стадий сна в виде строки
+            deepSleepDurationInfo = formatStageDuration(deepSleepDuration);
+            lightSleepDurationInfo = formatStageDuration(lightSleepDuration);
+            awakeDurationInfo = formatStageDuration(awakeDuration);
+            // Форматируем суммарную продолжительность сна в часах
+            sumSleepDurationInfo = formatSumSleepDuration(sumSleepDuration);
         }
         else {
             dailyStepsInfo = "???";
@@ -212,6 +231,11 @@ public class MainActivity extends AppCompatActivity  {
             dailyDistanceInfo = "???";
             pulseDailyAverageInfo = "???";
             pulseLastMeasurementInfo = "???";
+            //TODO: текст сна ???
+            deepSleepDurationInfo = "???";
+            lightSleepDurationInfo = "???";
+            awakeDurationInfo = "???";
+            sumSleepDurationInfo = "???";
         }
         MainPage.displayData();
 
@@ -262,12 +286,22 @@ public class MainActivity extends AppCompatActivity  {
         editor.putFloat("dailyDistance", dailyDistance).apply();
         editor.putInt("pulseDailyAverage", pulseDailyAverage).apply();
         editor.putInt("pulseLastMeasurement", pulseLastMeasurement).apply();
+        //TODO: сохранить сон
+        editor.putLong("deepSleepDuration", deepSleepDuration).apply();
+        editor.putLong("lightSleepDuration", lightSleepDuration).apply();
+        editor.putLong("awakeDuration", awakeDuration).apply();
+        editor.putLong("sumSleepDuration", sumSleepDuration).apply();
 
         editor.putString("dailyStepsInfo", dailyStepsInfo).apply();
         editor.putString("dailyCaloriesInfo", dailyCaloriesInfo).apply();
         editor.putString("dailyDistanceInfo", dailyDistanceInfo).apply();
         editor.putString("pulseDailyAverageInfo", pulseDailyAverageInfo).apply();
         editor.putString("pulseLastMeasurementInfo", pulseLastMeasurementInfo).apply();
+        //TODO: сохранить сон
+        editor.putString("deepSleepDurationInfo", deepSleepDurationInfo).apply();
+        editor.putString("lightSleepDurationInfo", lightSleepDurationInfo).apply();
+        editor.putString("awakeDurationInfo", awakeDurationInfo).apply();
+        editor.putString("sumSleepDurationInfo", sumSleepDurationInfo).apply();
 
     }
 
@@ -279,13 +313,23 @@ public class MainActivity extends AppCompatActivity  {
         dailyDistance = prefs.getFloat("dailyDistance", 0);
         pulseDailyAverage = prefs.getInt("pulseDailyAverage", 0);
         pulseLastMeasurement = prefs.getInt("pulseLastMeasurement",0);
+        //TODO: загрузить сон
+        deepSleepDuration = prefs.getLong("deepSleepDuration", 0);
+        lightSleepDuration = prefs.getLong("lightSleepDuration", 0);
+        awakeDuration = prefs.getLong("awakeDuration", 0);
+        sumSleepDuration = prefs.getLong("sumSleepDuration", 0);
+
 
         dailyStepsInfo = prefs.getString("dailyStepsInfo",null);
         dailyCaloriesInfo = prefs.getString("dailyCaloriesInfo",null);
         dailyDistanceInfo = prefs.getString("dailyDistanceInfo",null);
         pulseDailyAverageInfo = prefs.getString("pulseDailyAverageInfo",null);
         pulseLastMeasurementInfo = prefs.getString("pulseLastMeasurementInfo",null);
-
+        //TODO: загрузить сон
+        deepSleepDurationInfo = prefs.getString("deepSleepDurationInfo", null);
+        lightSleepDurationInfo = prefs.getString("lightSleepDurationInfo", null);
+        awakeDurationInfo = prefs.getString("awakeDurationInfo", null);
+        sumSleepDurationInfo = prefs.getString("sumSleepDurationInfo", null);
 
         setData();
     }
@@ -422,6 +466,13 @@ public class MainActivity extends AppCompatActivity  {
 
         };
 
+        // Список для хранения названий стадий сна
+        ArrayList<String> sleepStageNames = new ArrayList<String>();
+
+        // Список для хранения продолжительности стадий сна
+        ArrayList<Long> sleepStageDurations = new ArrayList<Long>();
+
+
         Calendar cal = Calendar.getInstance();
         Log.i("Calendar", String.format(cal.toString()));
         cal.setTime(new Date());
@@ -460,10 +511,21 @@ public class MainActivity extends AppCompatActivity  {
                                     String sleepStage = SLEEP_STAGE_NAMES[sleepStageVal];
                                     long segmentStart = dp.getStartTime(TimeUnit.MILLISECONDS);
                                     long segmentEnd = dp.getEndTime(TimeUnit.MILLISECONDS);
+
+                                    // считаем длительность в миллисекундах
+                                    long duration = segmentEnd - segmentStart;
+
+                                    // Добавляем в списки название и продолжительность стадии
+                                    sleepStageNames.add(sleepStage);
+                                    sleepStageDurations.add(duration);
+
                                     Log.i("\t* Type ", String.format("%1$s between %2$d and %3$d",
                                             sleepStage, segmentStart, segmentEnd));
                                 }
                             }
+                            // вызываем метод обработки стадий сна и их продолжительности
+                            parseSleepStagesDuration(sleepStageNames, sleepStageDurations);
+                            setData();
                         }
                     }
                 })
@@ -479,6 +541,44 @@ public class MainActivity extends AppCompatActivity  {
                         Log.i("Sleep session read: ", "Complete");
                     }
                 });
+    }
+
+    public void parseSleepStagesDuration(ArrayList<String> stages, ArrayList<Long> durations){
+        deepSleepDuration = 0;
+        lightSleepDuration = 0;
+        awakeDuration = 0;
+        for (int i = 0; i < stages.size(); i++){
+            if (stages.get(i).equals("Deep sleep")){
+                deepSleepDuration += durations.get(i);
+            }
+            if (stages.get(i).equals("Light sleep")){
+                lightSleepDuration += durations.get(i);
+            }
+            if (stages.get(i).equals("Awake (during sleep)")){
+                awakeDuration += durations.get(i);
+            }
+        }
+        sumSleepDuration = deepSleepDuration + lightSleepDuration;
+    }
+
+    public String formatStageDuration(long durationInMillis){
+        Duration duration = Duration.ofMillis(durationInMillis);
+        long seconds = duration.getSeconds();
+        long HH = seconds / 3600;
+        long MM = (seconds % 3600) / 60;
+        if (HH == 0){
+            return String.format(Locale.getDefault(),"%2d мин", MM);
+        } else if (MM == 0) {
+            return String.format(Locale.getDefault(),"%2d ч", HH);
+        }
+        else return String.format(Locale.getDefault(),"%2d ч %02d мин", HH, MM);
+    }
+
+    public String formatSumSleepDuration(long durationInMillis){
+        Duration duration = Duration.ofMillis(durationInMillis);
+        int seconds = (int)duration.getSeconds();
+        float HH = (float)seconds / 3600;
+        return String.format(Locale.getDefault(), "%.1f", HH);
     }
 
     public void getHeartRateData(){
