@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     private EditText noteName;
     private EditText noteDescription;
+    private TextView createEdit_text;
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
@@ -81,13 +83,16 @@ public class NoteDetailsActivity extends AppCompatActivity {
         pickDateButton = findViewById(R.id.pickDateButton);
         saveNoteButton = findViewById(R.id.saveNoteButton);
         backButton = findViewById(R.id.backButton);
-        //TODO: обработать поле создание/редактирование задачи
+        createEdit_text = findViewById(R.id.createEdit_text);
+
         if (getIntent().hasExtra(EXTRA_NOTE)){
             note = getIntent().getParcelableExtra(EXTRA_NOTE);
             noteName.setText(note.noteName);
             noteDescription.setText(note.noteDescription);
+            createEdit_text.setText("Редактирование задачи");
 
             if (note.deadlineDate != 0L) {
+                createEdit_text.setText("Создание задачи");
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(note.deadlineDate);
                 Locale locale = new Locale("ru");

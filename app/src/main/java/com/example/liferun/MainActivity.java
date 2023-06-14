@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity  {
                 pulseDailyAverageInfo = "???";
                 pulseLastMeasurementInfo = "???";
             }
-            //TODO: текст сна
+
             // Форматируем продолжительность стадий сна в виде строки
             deepSleepDurationInfo = formatStageDuration(deepSleepDuration);
             lightSleepDurationInfo = formatStageDuration(lightSleepDuration);
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity  {
             dailyDistanceInfo = "???";
             pulseDailyAverageInfo = "???";
             pulseLastMeasurementInfo = "???";
-            //TODO: текст сна ???
+
             deepSleepDurationInfo = "???";
             lightSleepDurationInfo = "???";
             awakeDurationInfo = "???";
@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity  {
         editor.putFloat("dailyDistance", dailyDistance).apply();
         editor.putInt("pulseDailyAverage", pulseDailyAverage).apply();
         editor.putInt("pulseLastMeasurement", pulseLastMeasurement).apply();
-        //TODO: сохранить сон
+
         editor.putLong("deepSleepDuration", deepSleepDuration).apply();
         editor.putLong("lightSleepDuration", lightSleepDuration).apply();
         editor.putLong("awakeDuration", awakeDuration).apply();
@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity  {
         editor.putString("dailyDistanceInfo", dailyDistanceInfo).apply();
         editor.putString("pulseDailyAverageInfo", pulseDailyAverageInfo).apply();
         editor.putString("pulseLastMeasurementInfo", pulseLastMeasurementInfo).apply();
-        //TODO: сохранить сон
+
         editor.putString("deepSleepDurationInfo", deepSleepDurationInfo).apply();
         editor.putString("lightSleepDurationInfo", lightSleepDurationInfo).apply();
         editor.putString("awakeDurationInfo", awakeDurationInfo).apply();
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity  {
         dailyDistance = prefs.getFloat("dailyDistance", 0);
         pulseDailyAverage = prefs.getInt("pulseDailyAverage", 0);
         pulseLastMeasurement = prefs.getInt("pulseLastMeasurement",0);
-        //TODO: загрузить сон
+
         deepSleepDuration = prefs.getLong("deepSleepDuration", 0);
         lightSleepDuration = prefs.getLong("lightSleepDuration", 0);
         awakeDuration = prefs.getLong("awakeDuration", 0);
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity  {
         dailyDistanceInfo = prefs.getString("dailyDistanceInfo",null);
         pulseDailyAverageInfo = prefs.getString("pulseDailyAverageInfo",null);
         pulseLastMeasurementInfo = prefs.getString("pulseLastMeasurementInfo",null);
-        //TODO: загрузить сон
+
         deepSleepDurationInfo = prefs.getString("deepSleepDurationInfo", null);
         lightSleepDurationInfo = prefs.getString("lightSleepDurationInfo", null);
         awakeDurationInfo = prefs.getString("awakeDurationInfo", null);
