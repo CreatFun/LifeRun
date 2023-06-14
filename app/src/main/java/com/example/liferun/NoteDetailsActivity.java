@@ -90,7 +90,8 @@ public class NoteDetailsActivity extends AppCompatActivity {
             if (note.deadlineDate != 0L) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(note.deadlineDate);
-                String dateButtonText = String.format(Locale.getDefault(), "%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH));
+                Locale locale = new Locale("ru");
+                String dateButtonText = String.format(locale, "%1$d  %2$s", cal.get(Calendar.DATE), cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale));
                 pickDateButton.setText(dateButtonText);
             }
         }
