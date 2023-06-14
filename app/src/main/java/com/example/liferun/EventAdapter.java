@@ -79,7 +79,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
     public void setItems(List<Event> events){
-        long currentDate = CalendarPage.pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
+        // Домножаем на 1000 чтобы время было в миллисекундах
+        long currentDate = CalendarPage.pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()*1000;
         sortedList.clear();
         for (Event event:
              events) {

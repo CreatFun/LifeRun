@@ -188,7 +188,8 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
             for (Event event:
                     events) {
                 long eventDate = event.date;
-                if (eventDate == pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()){
+                // Домножаем pickedDate чтобы получить время в миллисекундах
+                if (eventDate == pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()*1000){
                     startEventPopup();
                     break;
                 }
