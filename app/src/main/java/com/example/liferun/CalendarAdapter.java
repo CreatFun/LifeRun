@@ -8,19 +8,62 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SortedList;
+
+import com.example.liferun.model.Event;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.List;
 
 class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<LocalDate> daysOfMonth;
     private final OnItemListener onItemListener;
+    SortedList<Event> sortedList;
 
     public CalendarAdapter(ArrayList<LocalDate> daysOfMonth, OnItemListener onItemListener)
     {
         this.daysOfMonth = daysOfMonth;
         this.onItemListener = onItemListener;
+
+        sortedList = new SortedList<>(Event.class, new SortedList.Callback<Event>() {
+            @Override
+            public int compare(Event o1, Event o2) {
+                return 0;
+            }
+
+            @Override
+            public void onChanged(int position, int count) {
+
+            }
+
+            @Override
+            public boolean areContentsTheSame(Event oldItem, Event newItem) {
+                return false;
+            }
+
+            @Override
+            public boolean areItemsTheSame(Event item1, Event item2) {
+                return false;
+            }
+
+            @Override
+            public void onInserted(int position, int count) {
+
+            }
+
+            @Override
+            public void onRemoved(int position, int count) {
+
+            }
+
+            @Override
+            public void onMoved(int fromPosition, int toPosition) {
+
+            }
+        });
     }
 
     @NonNull
@@ -50,6 +93,13 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
                     holder.calendarCell.setBackgroundColor(Color.parseColor("#B0C7E8"));
                 }
             }
+            if (sortedList.size() != 0){
+                for (int i=0; i < sortedList.size();i++){
+                    if (sortedList.get(i).date == date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()*1000){
+                        holder.eventIndicator.setImageResource(R.drawable.event_indicator);
+                    }
+                }
+            }
 //        else{
 //            holder.dayOfMonth.setTextColor(Color.BLACK);
 //        }
@@ -68,6 +118,16 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     public interface  OnItemListener
     {
         void onItemClick(int position, LocalDate date);
+    }
+
+    public void setItems(List<Event> events){
+        sortedList.clear();
+        if (events != null){
+            for (Event event:
+                    events) {
+                sortedList.add(event);
+            }
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package com.example.liferun;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,14 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     private final ArrayList<LocalDate> daysOfMonth;
     public final View calendarCell;
     public final TextView dayOfMonth;
+    public final ImageView eventIndicator;
     private final CalendarAdapter.OnItemListener onItemListener;
     public CalendarViewHolder(@NonNull View itemView, CalendarAdapter.OnItemListener onItemListener, ArrayList<LocalDate> daysOfMonth)
     {
         super(itemView);
         calendarCell = itemView.findViewById(R.id.calendarCell);
         dayOfMonth = itemView.findViewById(R.id.cellDayText);
+        eventIndicator = itemView.findViewById(R.id.eventIndicator);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
         this.daysOfMonth = daysOfMonth;

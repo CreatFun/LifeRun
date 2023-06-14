@@ -41,6 +41,9 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
     List<Event> events;
 
+    boolean isUpdated = false;
+    View v;
+
 
 
     public CalendarPage() {
@@ -57,7 +60,7 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_calendar_page, container, false);
+        v = inflater.inflate(R.layout.fragment_calendar_page, container, false);
 
         initWidgets(v);
         selectedDate = LocalDate.now();
@@ -85,6 +88,13 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // заставляет снова обновить список, например после добавления новой заметки
+        isUpdated = false;
+
+    }
 
     private void initWidgets(View v)
     {
@@ -116,6 +126,20 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
         calendarRecyclerView.setLayoutManager(layoutManager);
         calendarRecyclerView.setAdapter(calendarAdapter);
+
+        MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mainViewModel.getEventLiveData().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
+            @Override
+            public void onChanged(List<Event> events) {
+                calendarAdapter.setItems(events);
+                // повторно обновляет страницу, чтобы список отобразился сразу
+                if (!isUpdated){
+                    setMonthView(v);
+                    isUpdated = true;
+                }
+                //
+            }
+        });
     }
 
     private ArrayList<LocalDate> daysInMonthArray(LocalDate date)
@@ -181,9 +205,21 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 7);
             calendarRecyclerView.setLayoutManager(layoutManager);
             calendarRecyclerView.setAdapter(calendarAdapter);
-            //
+
 
             MainViewModel mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+            mainViewModel.getEventLiveData().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
+                @Override
+                public void onChanged(List<Event> events) {
+                    calendarAdapter.setItems(events);
+                    // повторно обновляет страницу, чтобы список отобразился сразу
+                    if (!isUpdated){
+                        setMonthView(v);
+                        isUpdated = true;
+                    }
+                    //
+                }
+            });
             events = mainViewModel.getEventLiveData().getValue();
             for (Event event:
                     events) {
