@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onResume() {
         super.onResume();
         isRunning = true;
+        loadData();
         if (hasOAuthPermission() & allPermissionsGranted()){
             if (isRunning){
                 readData();
@@ -369,7 +370,7 @@ public class MainActivity extends AppCompatActivity  {
     public void saveData(){
         if (hasOAuthPermission())
             readData();
-        prefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("com.example.liferun", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("dailySteps",dailySteps).apply();
@@ -405,7 +406,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void loadData(){
-        prefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        prefs = getSharedPreferences("com.example.liferun", Context.MODE_PRIVATE);
 
         dailySteps = prefs.getInt("dailySteps", 0);
         dailyCalories = prefs.getInt("dailyCalories", 0);

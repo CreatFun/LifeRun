@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -31,20 +32,43 @@ public class SetGoalsPopup extends AppCompatActivity {
         btn_saveGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+
                 if (et_stepsGoal.getText() != null){
-                    MainActivity.stepsGoal = Integer.parseInt(et_stepsGoal.getText().toString());
+                    int steps = Integer.parseInt(et_stepsGoal.getText().toString());
+                    editor.putInt("stepsGoal", steps).apply();
+                    editor.putString("stepsGoalInfo", getString(R.string.stepsGoal, steps));
                 }
-                else MainActivity.stepsGoal = 12000;
+                else {
+                    int steps = 12000;
+                    editor.putInt("stepsGoal", steps).apply();
+                    editor.putString("stepsGoalInfo", getString(R.string.stepsGoal, steps));
+                }
+
 
                 if (et_caloriesGoal.getText() != null){
-                    MainActivity.caloriesGoal = Integer.parseInt(et_caloriesGoal.getText().toString());
+                    int calories = Integer.parseInt(et_caloriesGoal.getText().toString());
+                    editor.putInt("caloriesGoal", calories).apply();
+                    editor.putString("caloriesGoalInfo", getString(R.string.caloriesGoal, calories));
                 }
-                else MainActivity.caloriesGoal = 2000;
+                else {
+                    int calories = 2000;
+                    editor.putInt("caloriesGoal", calories).apply();
+                    editor.putString("caloriesGoalInfo", getString(R.string.caloriesGoal, calories));
+                }
+
 
                 if (et_hoursGoal.getText() != null){
-                    MainActivity.hoursGoal = Integer.parseInt(et_hoursGoal.getText().toString());
+                    int hours = Integer.parseInt(et_hoursGoal.getText().toString());
+                    editor.putInt("hoursGoal", hours).apply();
+                    editor.putString("hoursGoalInfo", getString(R.string.hoursGoal, hours));
                 }
-                else MainActivity.hoursGoal = 8;
+                else {
+                    int hours = 8;
+                    editor.putInt("hoursGoal", hours).apply();
+                    editor.putString("hoursGoalInfo", getString(R.string.hoursGoal, hours));
+                }
 
                 finish();
             }
