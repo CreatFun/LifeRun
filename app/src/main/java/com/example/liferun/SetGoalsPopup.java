@@ -35,7 +35,7 @@ public class SetGoalsPopup extends AppCompatActivity {
                 SharedPreferences prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
-                if (et_stepsGoal.getText() != null){
+                if (!String.valueOf(et_stepsGoal.getText()).equals("") && !String.valueOf(et_stepsGoal.getText()).equals("0")){
                     int steps = Integer.parseInt(et_stepsGoal.getText().toString());
                     editor.putInt("stepsGoal", steps).apply();
                     editor.putString("stepsGoalInfo", getString(R.string.stepsGoal, steps));
@@ -47,7 +47,7 @@ public class SetGoalsPopup extends AppCompatActivity {
                 }
 
 
-                if (et_caloriesGoal.getText() != null){
+                if (!String.valueOf(et_caloriesGoal.getText()).equals("") && !String.valueOf(et_caloriesGoal.getText()).equals("0")){
                     int calories = Integer.parseInt(et_caloriesGoal.getText().toString());
                     editor.putInt("caloriesGoal", calories).apply();
                     editor.putString("caloriesGoalInfo", getString(R.string.caloriesGoal, calories));
@@ -59,7 +59,7 @@ public class SetGoalsPopup extends AppCompatActivity {
                 }
 
 
-                if (et_hoursGoal.getText() != null){
+                if (!String.valueOf(et_hoursGoal.getText()).equals("") && !String.valueOf(et_hoursGoal.getText()).equals("0")){
                     int hours = Integer.parseInt(et_hoursGoal.getText().toString());
                     editor.putInt("hoursGoal", hours).apply();
                     editor.putString("hoursGoalInfo", getString(R.string.hoursGoal, hours));
