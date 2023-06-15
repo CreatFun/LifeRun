@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -26,17 +27,44 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Button buttonRequest = findViewById(R.id.authorization_button);
-        buttonRequest.setOnClickListener(view -> requestOAuthPermission());
+        // Кнопка авторизации
+        TextView tv_askAuthorization = findViewById(R.id.tv_askAuthorization);
+        tv_askAuthorization.setOnClickListener(view -> requestOAuthPermission());
 
-        Button permissionsRequestButton = findViewById(R.id.get_permissions_button);
-        permissionsRequestButton.setOnClickListener(new View.OnClickListener() {
+        // Кнопка разрешений
+        TextView tv_askPermissions = findViewById(R.id.tv_askPermissions);
+        tv_askPermissions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 requestNeededPermissions();
+            }
+        });
+
+        // Кнопка настройки целей
+        TextView tv_setGoals = findViewById(R.id.tv_setGoals);
+        tv_setGoals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
+
+        TextView tv_aboutApp = findViewById(R.id.tv_aboutApp);
+        tv_aboutApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        TextView tv_Feedback = findViewById(R.id.tv_Feedback);
+        tv_Feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
     }
 
