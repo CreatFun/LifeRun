@@ -45,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         tv_setGoals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startSetGoalsPopup();
             }
         });
 
@@ -71,6 +71,10 @@ public class SettingsActivity extends AppCompatActivity {
     public void startMainActivity(View v){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void startSetGoalsPopup(){
+        SetGoalsPopup.startSetGoalsPopupActivity(this);
     }
 
 
