@@ -158,4 +158,9 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
         caller.startActivity(intent);
     }
+
+    public void startSettingsActivity(View v){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 }
