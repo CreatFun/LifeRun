@@ -17,6 +17,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.liferun.model.Note;
 
+import org.w3c.dom.Text;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
@@ -84,6 +87,16 @@ public class NoteDetailsActivity extends AppCompatActivity {
         saveNoteButton = findViewById(R.id.saveNoteButton);
         backButton = findViewById(R.id.backButton);
         createEdit_text = findViewById(R.id.createEdit_text);
+
+
+        TextView tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
+
+        // Вписываем текущую дату в appBar
+        String dateText;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
+        LocalDate date = LocalDate.now();
+        dateText = date.format(formatter);
+        tv_dayOfWeekAndDate.setText(CalendarPage.capitalizeFirstLetter(dateText));
 
         if (getIntent().hasExtra(EXTRA_NOTE)){
             note = getIntent().getParcelableExtra(EXTRA_NOTE);

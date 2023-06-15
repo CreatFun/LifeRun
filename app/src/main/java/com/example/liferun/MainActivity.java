@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity  {
 
         tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
 
-        // Вписываем текущую дату в заголовок
+        // Вписываем текущую дату в appBar
         String dateText;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
         LocalDate date = LocalDate.now();

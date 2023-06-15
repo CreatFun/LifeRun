@@ -88,9 +88,16 @@ public class EventDetailsActivity extends AppCompatActivity {
         // Определение выбранной даты в long формате
         currentDate = CalendarPage.pickedDate.atStartOfDay(ZoneId.systemDefault()).toEpochSecond()*1000;
 
-        // Вписываем текущую дату в заголовок
+        TextView tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
+
+        // Вписываем текущую дату в appBar
         String dateText;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
+        LocalDate date = LocalDate.now();
+        dateText = date.format(formatter);
+        tv_dayOfWeekAndDate.setText(CalendarPage.capitalizeFirstLetter(dateText));
+
+        // Вписываем текущую дату в заголовок
         dateText = CalendarPage.pickedDate.format(formatter);
         eventDate_text.setText(CalendarPage.capitalizeFirstLetter(dateText));
 
