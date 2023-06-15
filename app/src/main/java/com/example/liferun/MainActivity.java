@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity  {
     public static String awakeDurationInfo;
     public static String sumSleepDurationInfo;
 
+    public static int stepsGoal, caloriesGoal, hoursGoal;
+    public static String stepsGoalInfo, caloriesGoalInfo, hoursGoalInfo;
+
     public MainActivity(){
 
     }
@@ -114,11 +117,19 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+
+        // Сохраняем цели по умолчанию перед загрузкой
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("stepsGoal",stepsGoal).apply();
+        editor.putInt("caloriesGoal",caloriesGoal).apply();
+        editor.putInt("hoursGoal",hoursGoal).apply();
+
         // Если первый запуск
         if (prefs.getBoolean("firstrun", true)){
             // если перешел по кнопке логина
             if (isLoggingIn){
                 setContentView(R.layout.activity_main);
+                setGoals();
                 isLoggingIn = false;
                 prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
                 requestOAuthPermission();
@@ -127,6 +138,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             } else if (isLoginSkipped) { // если перешел по кнопке пропустить
                 setContentView(R.layout.activity_main);
+                setGoals();
                 isLoginSkipped = false;
                 prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
                 permissionsRationale();
@@ -138,6 +150,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else {
             setContentView(R.layout.activity_main);
+            setGoals();
 
             // Проверка авторизации и возможности отобразить данные
             if (hasOAuthPermission()){
@@ -148,6 +161,7 @@ public class MainActivity extends AppCompatActivity  {
                                 "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
                         .show();
             }
+
 
             loadData();
 
@@ -208,6 +222,18 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+    public void setGoals(){
+        // Если первый запуск, установить значения по умолчанию
+        if (prefs.getBoolean("firstrun", true)){
+            stepsGoal = 12000;
+            caloriesGoal = 2000;
+            hoursGoal = 8;
+        }
+
+        saveData();
+        setData();
+    }
+
     public void startLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
@@ -246,6 +272,10 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void setData(){
+        stepsGoalInfo = getString(R.string.stepsGoal, stepsGoal);
+        caloriesGoalInfo = getString(R.string.caloriesGoal, caloriesGoal);
+        hoursGoalInfo = getString(R.string.hoursGoal, hoursGoal);
+
         if (hasOAuthPermission()){
             if (checkSelfPermission(ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
                 dailyStepsInfo = String.valueOf(dailySteps);
@@ -337,6 +367,10 @@ public class MainActivity extends AppCompatActivity  {
         editor.putInt("pulseDailyAverage", pulseDailyAverage).apply();
         editor.putInt("pulseLastMeasurement", pulseLastMeasurement).apply();
 
+        editor.putInt("stepsGoal",stepsGoal).apply();
+        editor.putInt("caloriesGoal",caloriesGoal).apply();
+        editor.putInt("hoursGoal",hoursGoal).apply();
+
         editor.putLong("deepSleepDuration", deepSleepDuration).apply();
         editor.putLong("lightSleepDuration", lightSleepDuration).apply();
         editor.putLong("awakeDuration", awakeDuration).apply();
@@ -353,6 +387,10 @@ public class MainActivity extends AppCompatActivity  {
         editor.putString("awakeDurationInfo", awakeDurationInfo).apply();
         editor.putString("sumSleepDurationInfo", sumSleepDurationInfo).apply();
 
+        editor.putString("stepsGoalInfo", stepsGoalInfo).apply();
+        editor.putString("caloriesGoalInfo", caloriesGoalInfo).apply();
+        editor.putString("hoursGoalInfo", hoursGoalInfo).apply();
+
     }
 
     public void loadData(){
@@ -363,6 +401,10 @@ public class MainActivity extends AppCompatActivity  {
         dailyDistance = prefs.getFloat("dailyDistance", 0);
         pulseDailyAverage = prefs.getInt("pulseDailyAverage", 0);
         pulseLastMeasurement = prefs.getInt("pulseLastMeasurement",0);
+
+        stepsGoal = prefs.getInt("stepsGoal",0);
+        caloriesGoal = prefs.getInt("caloriesGoal",0);
+        hoursGoal = prefs.getInt("hoursGoal",0);
 
         deepSleepDuration = prefs.getLong("deepSleepDuration", 0);
         lightSleepDuration = prefs.getLong("lightSleepDuration", 0);
@@ -380,6 +422,11 @@ public class MainActivity extends AppCompatActivity  {
         lightSleepDurationInfo = prefs.getString("lightSleepDurationInfo", null);
         awakeDurationInfo = prefs.getString("awakeDurationInfo", null);
         sumSleepDurationInfo = prefs.getString("sumSleepDurationInfo", null);
+
+        stepsGoalInfo = prefs.getString("stepsGoalInfo", null);
+        caloriesGoalInfo = prefs.getString("caloriesGoalInfo", null);
+        hoursGoalInfo = prefs.getString("hoursGoalInfo", null);
+
 
         setData();
     }

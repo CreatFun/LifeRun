@@ -24,7 +24,11 @@ public class MainPage extends Fragment {
             tv_PulseDailyAverage,
             tv_pulseLastMeasurement,
             tv_deepSleepDuration, tv_lightSleepDuration, tv_awakeDuration, tv_sumSleepDuration;
-    Button updateInfoButton;
+
+    public static TextView tv_stepsGoal,
+            tv_caloriesGoal, tv_hoursGoal;
+
+
 
 
 
@@ -60,14 +64,9 @@ public class MainPage extends Fragment {
         tv_awakeDuration = v.findViewById(R.id.tv_awakeDuration);
         tv_sumSleepDuration = v.findViewById(R.id.tv_sumSleepDuration);
 
-//        updateInfoButton = v.findViewById(R.id.updateInfo_button);
-//
-//        updateInfoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                displayData();
-//            }
-//        });
+        tv_stepsGoal = v.findViewById(R.id.tv_stepsGoal);
+        tv_caloriesGoal = v.findViewById(R.id.tv_caloriesGoal);
+        tv_hoursGoal = v.findViewById(R.id.tv_hoursGoal);
 
 
 
@@ -132,6 +131,11 @@ public class MainPage extends Fragment {
         tv_lightSleepDuration.setText(MainActivity.lightSleepDurationInfo);
         tv_awakeDuration.setText(MainActivity.awakeDurationInfo);
         tv_sumSleepDuration.setText(MainActivity.sumSleepDurationInfo);
+
+        tv_stepsGoal.setText(MainActivity.stepsGoalInfo);
+        tv_caloriesGoal.setText(MainActivity.caloriesGoalInfo);
+        tv_hoursGoal.setText(MainActivity.hoursGoalInfo);
+
     }
 
 }
