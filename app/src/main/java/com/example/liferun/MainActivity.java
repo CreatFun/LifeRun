@@ -1,9 +1,5 @@
 package com.example.liferun;
 
-
-//import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-//import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-
 import static android.Manifest.permission.ACTIVITY_RECOGNITION;
 import static android.Manifest.permission.BODY_SENSORS;
 
@@ -12,14 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.SplashScreen;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -65,12 +60,6 @@ public class MainActivity extends AppCompatActivity  {
     private static final int REQUEST_OAUTH_REQUEST_CODE = 1;
     private static final int PERMISSION_REQUEST_CODE = 2;
 
-    TextView tv_Steps,
-            tv_Calories,
-            tv_Distance,
-            tv_PulseDailyAverage,
-            tv_pulseLastMeasurement;
-    Button updateInfoButton;
 
     GoogleSignInAccount lastSignedInAccount;
 
@@ -80,7 +69,7 @@ public class MainActivity extends AppCompatActivity  {
 
     public static boolean isLoginSkipped = false;
     public static boolean isLoggingIn = false;
-    boolean isPermissionAsked = false;
+
 
     SharedPreferences prefs = null;
     FitnessOptions fitnessOptions;
@@ -185,55 +174,6 @@ public class MainActivity extends AppCompatActivity  {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
-
-
-
-
-
-//        tv_Steps = findViewById(R.id.tv_stepsCount);
-//        tv_Calories = findViewById(R.id.tv_caloriesCount);
-//        tv_Distance = findViewById(R.id.tv_distanceCount);
-//        tv_PulseDailyAverage = findViewById(R.id.tv_pulseDailyAverageCount);
-//        tv_pulseLastMeasurement = findViewById(R.id.tv_pulseLastMeasurementCount);
-//
-//        updateInfoButton = findViewById(R.id.updateInfo_button);
-//        updateInfoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (hasOAuthPermission()) {
-////                    findDataSources();
-//                    readData();
-//                }
-//                else Toast.makeText(MainActivity.this,
-//                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        });
-
-
-
-
-
-
-
-//        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
-//        if (prefs.getBoolean("firstrun", true)){
-//            permissionsRationale();
-//            prefs.edit().putBoolean("firstrun", false).apply();
-//        }
-//        else {
-//            if (hasOAuthPermission()){
-//                readData();
-//            }
-//            else {
-//                Toast.makeText(MainActivity.this,
-//                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        }
-
-
 
     }
 
@@ -341,39 +281,6 @@ public class MainActivity extends AppCompatActivity  {
         MainPage.displayData();
 
     }
-
-//    private void setData() {
-//        if (hasOAuthPermission()){
-//            if (checkSelfPermission(ACTIVITY_RECOGNITION) == PackageManager.PERMISSION_GRANTED) {
-//                tv_Steps.setText(String.valueOf(dailySteps));
-//                tv_Calories.setText(String.valueOf(dailyCalories));
-//                tv_Distance.setText(getString(R.string.distanceCount,
-//                        String.format(Locale.ENGLISH,"%.2f", dailyDistance)));
-//            }
-//            else {
-//                tv_Steps.setText("???");
-//                tv_Calories.setText("???");
-//                tv_Distance.setText("???");
-//            }
-//
-//            if (checkSelfPermission(BODY_SENSORS) == PackageManager.PERMISSION_GRANTED) {
-//                tv_PulseDailyAverage.setText(getString(R.string.pulseDailyAverageCount, pulseDailyAverage));
-//                tv_pulseLastMeasurement.setText(getString(R.string.pulseLastMeasurementCount, pulseLastMeasurement));
-//            }
-//            else {
-//                tv_PulseDailyAverage.setText("???");
-//                tv_pulseLastMeasurement.setText("???");
-//            }
-//        }
-//        else {
-//            tv_Steps.setText("???");
-//            tv_Calories.setText("???");
-//            tv_Distance.setText("???");
-//            tv_PulseDailyAverage.setText("???");
-//            tv_pulseLastMeasurement.setText("???");
-//        }
-//    }
-
 
 
     public void saveData(){
@@ -496,13 +403,11 @@ public class MainActivity extends AppCompatActivity  {
     private boolean allPermissionsGranted(){
         int activityPermission = (ContextCompat.checkSelfPermission(this, ACTIVITY_RECOGNITION));
         int sensorsPermission = (ContextCompat.checkSelfPermission(this, BODY_SENSORS));
-//        int coarseLocationPermission = (ContextCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION));
-//        int fineLocationPermission = (ContextCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION));
+
 
         if ((activityPermission == 0)
                 & (sensorsPermission == 0))
-//                & (coarseLocationPermission == 0)
-//                & (fineLocationPermission == 0))
+
             return true;
         else return false;
 
@@ -513,8 +418,6 @@ public class MainActivity extends AppCompatActivity  {
                 new String[]{
                         ACTIVITY_RECOGNITION,
                         BODY_SENSORS,
-//                        ACCESS_COARSE_LOCATION,
-//                        ACCESS_FINE_LOCATION
                 },
                 PERMISSION_REQUEST_CODE);
     }
@@ -526,7 +429,6 @@ public class MainActivity extends AppCompatActivity  {
     private FitnessOptions getFitnessSignInOptions() {
         return FitnessOptions.builder()
                 .addDataType(DataType.TYPE_DISTANCE_DELTA, FitnessOptions.ACCESS_READ)
-//                .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_CALORIES_EXPENDED, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_HEART_RATE_BPM, FitnessOptions.ACCESS_READ)
                 .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
@@ -570,10 +472,10 @@ public class MainActivity extends AppCompatActivity  {
         };
 
         // Список для хранения названий стадий сна
-        ArrayList<String> sleepStageNames = new ArrayList<String>();
+        ArrayList<String> sleepStageNames = new ArrayList<>();
 
         // Список для хранения продолжительности стадий сна
-        ArrayList<Long> sleepStageDurations = new ArrayList<Long>();
+        ArrayList<Long> sleepStageDurations = new ArrayList<>();
 
 
         Calendar cal = Calendar.getInstance();
@@ -712,13 +614,6 @@ public class MainActivity extends AppCompatActivity  {
                 .addOnSuccessListener(new OnSuccessListener<DataReadResponse>() {
                     @Override
                     public void onSuccess(DataReadResponse dataReadResponse) {
-//                        for (Bucket bucket : dataReadResponse.getBuckets()){
-//                            for (DataSet dataSet : bucket.getDataSets()){
-//                                dumpDataSet(dataSet);
-//                                List<DataPoint> dataPoints = dataSet.getDataPoints();
-//                                Log.i("Data points: ", String.valueOf(dataPoints));
-//                            }
-//                        }
                         DataSet dataSet = dataReadResponse.getDataSet(DataType.TYPE_HEART_RATE_BPM);
                         List<DataPoint> dataPoints = dataSet.getDataPoints();
                         Log.i("Data points: ", String.valueOf(dataPoints));
@@ -872,111 +767,6 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-//    public void dumpDataSet(DataSet dataSet){
-//        Log.d("Data returned for Data type: ", String.valueOf(dataSet.getDataType()));
-//        for (DataPoint dp : dataSet.getDataPoints()){
-//            Log.d("","Data point:");
-//            Log.d("\tType: ",String.valueOf(dp.getDataType()));
-//            Log.d("\tStart: ",String.valueOf(dp.getStartTime(TimeUnit.MILLISECONDS)));
-//            Log.d("\tEnd: ",String.valueOf(dp.getEndTime(TimeUnit.MILLISECONDS)));
-//            for (Field field : dp.getDataType().getFields()){
-//                Log.d("\tField: ", field.getName());
-//                Log.d("Value: ", String.valueOf(dp.getValue(field)));
-//            }
-//        }
-//        float total = dataSet.isEmpty()
-//                ? 0
-//                : dataSet.getDataPoints().get(0).getValue(Field.FIELD_AVERAGE).asFloat();
-//        Log.d("Pulse ", String.valueOf(total));
-//        pulseDailyAverage = (total != 0)
-//                ? (Math.round(dataSet.getDataPoints().get(0).getValue(Field.FIELD_AVERAGE).asFloat()))
-//                : 0;
-//        setData();
-//    }
-
-
-
-
-
-
-//    public void findDataSources(){
-//        Fitness.getSensorsClient(getApplicationContext(), GoogleSignIn.getAccountForExtension(getApplicationContext(), fitnessOptions) )
-//                .findDataSources(
-//                        new DataSourcesRequest.Builder()
-//                                .setDataTypes(DataType.TYPE_HEART_RATE_BPM)
-//                                .setDataSourceTypes(DataSource.TYPE_RAW)
-//                                .build())
-//                .addOnSuccessListener(new OnSuccessListener<List<DataSource>>() {
-//                    @Override
-//                    public void onSuccess(List<DataSource> dataSources) {
-//                        dataSources.forEach(dataSource -> {
-//                            Log.d("Data source found: ", "${it.streamIdentifier}");
-//                            Log.d("Data Source type: ", "${it.dataType.name}");
-//
-//                            if (dataSource.getDataType() == DataType.TYPE_HEART_RATE_BPM){
-//                                Log.d("Data source for TYPE_HEART_RATE_BPM: ","Found");
-//                                setSensorListener();
-//                            }
-//                        });
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("Find data sources request: ","Failed");
-//                    }
-//                })
-//                .addOnCompleteListener(new OnCompleteListener<List<DataSource>>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<List<DataSource>> task) {
-//                        Log.d("Complete find sources: ","COMPLETE");
-//                    }
-//                });
-//    }
-//
-//    public void setSensorListener(){
-//        OnDataPointListener listener = dataPoint -> {
-//            for (Field field : dataPoint.getDataType().getFields()) {
-//                Value value = dataPoint.getValue(field);
-//                Log.i("Detected DataPoint field: ", "${field.getName()}");
-//                Log.i("Detected DataPoint value: ", "$value");
-//            }
-//        };
-//        Fitness.getSensorsClient(this, GoogleSignIn.getAccountForExtension(this, fitnessOptions))
-//                .add(
-//                        new SensorRequest.Builder()
-//                                .setDataType(DataType.TYPE_HEART_RATE_BPM)
-//                                .setSamplingRate(10, TimeUnit.SECONDS)
-//                                .build(),
-//                        listener
-//                )
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Log.i("Success: ", "Listener registered!");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.e("Failure: ", "Listener not registered.");
-//                    }
-//                })
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        Log.d("Complete: ", "set listener");
-//                    }
-//                });
-//
-//    }
-
-
-
-
-
-
     public void showToast(String toastText, String duration){
         if (Objects.equals(duration, "short"))
             Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
@@ -985,13 +775,9 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
-
-
     public void startSettingsActivity(View v){
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
-
 
 }
