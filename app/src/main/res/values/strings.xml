@@ -14,5 +14,6 @@
     <string name="previousMonthButton"><![CDATA[<-]]></string>
     <string name="nextMonthButton"><![CDATA[->]]></string>
 
+    <string name="skip_login"><b><u>Пропустить</u></b></string>
 
 </resources>

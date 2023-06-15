@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity  {
 
     boolean isRunning = false;
 
+    public static boolean isLoginSkipped = false;
+    public static boolean isLoggingIn = false;
+    boolean isPermissionAsked = false;
+
     SharedPreferences prefs = null;
     FitnessOptions fitnessOptions;
 
@@ -108,14 +112,54 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        loadData();
+        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+        // Если первый запуск
+        if (prefs.getBoolean("firstrun", true)){
+            // если перешел по кнопке логина
+            if (isLoggingIn){
+                setContentView(R.layout.activity_main);
+                isLoggingIn = false;
+                prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                requestOAuthPermission();
+                if (!allPermissionsGranted()){
+                    requestNeededPermissions();
+                }
+            } else if (isLoginSkipped) { // если перешел по кнопке пропустить
+                setContentView(R.layout.activity_main);
+                isLoginSkipped = false;
+                prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                permissionsRationale();
+            }
+            else {
+                startLoginActivity();
+                finish();
+            }
+        }
+        else {
+            setContentView(R.layout.activity_main);
 
-        // navigation code:
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+            // Проверка авторизации и возможности отобразить данные
+            if (hasOAuthPermission()){
+                readData();
+            }
+            else {
+                Toast.makeText(MainActivity.this,
+                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            loadData();
+
+            // navigation code:
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
+            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        }
+
+
+
+
 
 
 //        tv_Steps = findViewById(R.id.tv_stepsCount);
@@ -144,25 +188,29 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
-        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
-        if (prefs.getBoolean("firstrun", true)){
-            permissionsRationale();
-            prefs.edit().putBoolean("firstrun", false).apply();
-        }
-        else {
-            if (hasOAuthPermission()){
-                readData();
-            }
-            else {
-                Toast.makeText(MainActivity.this,
-                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-
+//        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+//        if (prefs.getBoolean("firstrun", true)){
+//            permissionsRationale();
+//            prefs.edit().putBoolean("firstrun", false).apply();
+//        }
+//        else {
+//            if (hasOAuthPermission()){
+//                readData();
+//            }
+//            else {
+//                Toast.makeText(MainActivity.this,
+//                                "Для отображения информации необходимо авторизоваться", Toast.LENGTH_SHORT)
+//                        .show();
+//            }
+//        }
 
 
+
+    }
+
+    public void startLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -339,7 +387,7 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-    private void permissionsRationale(){
+    public void permissionsRationale(){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Добро пожаловать!")
                 .setMessage("Для работы главной страницы приложения и отображения данных о физической активности необходимо войти в аккаунт Google и предоставить разрешения на обработку данных Google Fit. \nХотите авторизоваться сейчас?")
@@ -430,27 +478,12 @@ public class MainActivity extends AppCompatActivity  {
 
     private void readData() {
         lastSignedInAccount = GoogleSignIn.getLastSignedInAccount(this);
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(new Date());
-//        long endtime = cal.getTimeInMillis();
-//        cal.add(Calendar.YEAR, -1);
-//        long starttime = cal.getTimeInMillis();
-
-//        DataReadRequest readRequest = new DataReadRequest.Builder()
-//                .aggregate(DataType.TYPE_STEP_COUNT_DELTA)
-//                .aggregate(DataType.TYPE_CALORIES_EXPENDED)
-//                .aggregate(DataType.TYPE_DISTANCE_DELTA)
-//                .aggregate(DataType.TYPE_HEART_RATE_BPM)
-//                .bucketByTime(1, TimeUnit.DAYS)
-//                .setTimeRange(starttime, endtime, TimeUnit.MILLISECONDS)
-//                .build();
 
         getSleepData();
         getStepsData();
         getCaloriesData();
         getDistanceData();
         getHeartRateData();
-
 
         setData();
 
