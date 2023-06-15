@@ -118,20 +118,19 @@ public class MainActivity extends AppCompatActivity  {
 
         prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
 
-        // Сохраняем цели по умолчанию перед загрузкой
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("stepsGoal",stepsGoal).apply();
-        editor.putInt("caloriesGoal",caloriesGoal).apply();
-        editor.putInt("hoursGoal",hoursGoal).apply();
-
+        Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
         // Если первый запуск
-        if (prefs.getBoolean("firstrun", true)){
+        if (!prefs.contains("firstrun")){
             // если перешел по кнопке логина
             if (isLoggingIn){
                 setContentView(R.layout.activity_main);
                 setGoals();
                 isLoggingIn = false;
-                prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
+                prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
                 requestOAuthPermission();
                 if (!allPermissionsGranted()){
                     requestNeededPermissions();
@@ -140,7 +139,11 @@ public class MainActivity extends AppCompatActivity  {
                 setContentView(R.layout.activity_main);
                 setGoals();
                 isLoginSkipped = false;
-                prefs.edit().putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
+                prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("firstrun", false).apply(); // меняем значение первого запуска
+                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
                 permissionsRationale();
             }
             else {
@@ -150,6 +153,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         else {
             setContentView(R.layout.activity_main);
+            loadData();
             setGoals();
 
             // Проверка авторизации и возможности отобразить данные
@@ -163,13 +167,15 @@ public class MainActivity extends AppCompatActivity  {
             }
 
 
-            loadData();
 
-            // navigation code:
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-            NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
-            NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+
         }
+
+        // navigation code:
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        NavController navController = Navigation.findNavController(this,  R.id.fragmentContainerView);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
 
 
@@ -223,12 +229,17 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void setGoals(){
+        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
         // Если первый запуск, установить значения по умолчанию
-        if (prefs.getBoolean("firstrun", true)){
+        if (!prefs.contains("firstrun")){
             stepsGoal = 12000;
             caloriesGoal = 2000;
             hoursGoal = 8;
         }
+
+        stepsGoalInfo = getString(R.string.stepsGoal, stepsGoal);
+        caloriesGoalInfo = getString(R.string.caloriesGoal, caloriesGoal);
+        hoursGoalInfo = getString(R.string.hoursGoal, hoursGoal);
 
         saveData();
         setData();
