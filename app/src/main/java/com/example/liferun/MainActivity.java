@@ -50,6 +50,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,6 +109,8 @@ public class MainActivity extends AppCompatActivity  {
 
     public static int stepsGoal, caloriesGoal, hoursGoal;
     public static String stepsGoalInfo, caloriesGoalInfo, hoursGoalInfo;
+
+    TextView tv_dayOfWeekAndDate;
 
     public MainActivity(){
 
@@ -166,11 +170,16 @@ public class MainActivity extends AppCompatActivity  {
                         .show();
             }
 
-
-
-
-
         }
+
+        tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
+
+        // Вписываем текущую дату в заголовок
+        String dateText;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
+        LocalDate date = LocalDate.now();
+        dateText = date.format(formatter);
+        tv_dayOfWeekAndDate.setText(CalendarPage.capitalizeFirstLetter(dateText));
 
         // navigation code:
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
