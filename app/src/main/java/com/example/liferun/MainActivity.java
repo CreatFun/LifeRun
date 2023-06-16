@@ -242,6 +242,15 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void setData(){
+        // Вписываем имя в appBar, если оно сохранено
+        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+        String name = prefs.getString("userName", null);
+        TextView tv_name = findViewById(R.id.tv_name);
+        if (name != null){
+            tv_name.setText(name);
+        }
+        else tv_name.setText("");
+
         stepsGoalInfo = getString(R.string.stepsGoal, stepsGoal);
         caloriesGoalInfo = getString(R.string.caloriesGoal, caloriesGoal);
         hoursGoalInfo = getString(R.string.hoursGoal, hoursGoal);
