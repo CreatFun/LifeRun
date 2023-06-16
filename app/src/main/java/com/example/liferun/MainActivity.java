@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity  {
 
         prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
 
-        Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
         // Если первый запуск
         if (!prefs.contains("firstrun")){
             // если перешел по кнопке логина
@@ -119,11 +118,10 @@ public class MainActivity extends AppCompatActivity  {
                 setContentView(R.layout.activity_main);
                 setGoals();
                 isLoggingIn = false;
-                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
                 prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("firstrun", false).apply(); // меняем значение первого запуска
-                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
+                startAskNamePopup();
                 requestOAuthPermission();
                 if (!allPermissionsGranted()){
                     requestNeededPermissions();
@@ -132,11 +130,10 @@ public class MainActivity extends AppCompatActivity  {
                 setContentView(R.layout.activity_main);
                 setGoals();
                 isLoginSkipped = false;
-                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
                 prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putBoolean("firstrun", false).apply(); // меняем значение первого запуска
-                Log.i("first run", String.valueOf(prefs.getBoolean("firstrun", true)));
+                startAskNamePopup();
                 permissionsRationale();
             }
             else {
@@ -192,6 +189,10 @@ public class MainActivity extends AppCompatActivity  {
 
         saveData();
         setData();
+    }
+
+    public void startAskNamePopup(){
+        AskNamePopup.startAskNamePopup(this);
     }
 
     public void startLoginActivity(){

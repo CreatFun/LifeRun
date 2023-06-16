@@ -47,7 +47,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="130dp"
                 android:layout_height="20dp"
-                android:text="Имя"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#343434"
                 android:textSize="15sp" />
@@ -56,7 +56,7 @@
                 android:id="@+id/tv_dayOfWeekAndDate"
                 android:layout_width="130dp"
                 android:layout_height="20dp"
-                android:text="XXXX"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="#343434"
                 android:textSize="15sp"/>

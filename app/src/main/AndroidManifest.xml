@@ -20,9 +20,13 @@
         android:theme="@style/Theme.LifeRun"
         tools:targetApi="31">
         <activity
-            android:name=".FeedbackPopup"
+            android:name=".AskNamePopup"
             android:exported="false"
             android:theme="@style/Theme.Popup"/>
+        <activity
+            android:name=".FeedbackPopup"
+            android:exported="false"
+            android:theme="@style/Theme.Popup" />
         <activity
             android:name=".SetGoalsPopup"
             android:exported="false"

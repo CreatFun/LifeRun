@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minWidth="350dp"
+    android:minHeight="300dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#E6ECFE"
+    tools:context=".SetGoalsPopup">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Как Вас зовут?"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Введите имя:"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text=""
+                android:inputType="textCapSentences"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/black"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:maxLength="25"
+                android:maxLines="1"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_saveName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button"
+                app:backgroundTint="@null"
+                android:text="Сохранить"
+                android:textColor="@color/white"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_later"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button"
+                app:backgroundTint="@null"
+                android:text="Позже"
+                android:textColor="@color/white"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
