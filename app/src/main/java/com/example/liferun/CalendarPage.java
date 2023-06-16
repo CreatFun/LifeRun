@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.liferun.model.Event;
@@ -29,13 +27,9 @@ import java.util.List;
 
 public class CalendarPage extends Fragment implements CalendarAdapter.OnItemListener {
 
-    PopupWindow popupWindow;
-
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate, pickedDate;
-
-    private ImageButton previousMonth, nextMonth;
 
     FloatingActionButton addEventButton;
 
@@ -101,14 +95,14 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
         calendarRecyclerView = v.findViewById(R.id.calendarRecyclerView);
         monthYearText = v.findViewById(R.id.monthYearTV);
 
-        previousMonth = v.findViewById(R.id.previousMonthButton);
+        ImageButton previousMonth = v.findViewById(R.id.previousMonthButton);
         previousMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 previousMonthAction(v);
             }
         });
-        nextMonth = v.findViewById(R.id.nextMonthButton);
+        ImageButton nextMonth = v.findViewById(R.id.nextMonthButton);
         nextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,7 +211,6 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
                         setMonthView(v);
                         isUpdated = true;
                     }
-                    //
                 }
             });
             events = mainViewModel.getEventLiveData().getValue();
@@ -242,9 +235,5 @@ public class CalendarPage extends Fragment implements CalendarAdapter.OnItemList
 
     public void startEventPopup(){
         EventPopup.startEventPopupActivity(getActivity());
-//        PopupWindow eventsPopupWindow = new PopupWindow(getContext());
-//        View eventsPopupView = getLayoutInflater().inflate(R.layout.popup_events, null);
-//        eventsPopupWindow.setContentView(eventsPopupView);
-//        eventsPopupWindow.showAtLocation(getView(),1,0,0);
     }
 }
