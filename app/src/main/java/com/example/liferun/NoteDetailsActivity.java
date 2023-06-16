@@ -11,17 +11,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.liferun.model.Note;
 
-import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -37,11 +36,11 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
     private EditText noteName;
     private EditText noteDescription;
-    private TextView createEdit_text;
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
@@ -86,7 +85,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         pickDateButton = findViewById(R.id.pickDateButton);
         saveNoteButton = findViewById(R.id.saveNoteButton);
         backButton = findViewById(R.id.backButton);
-        createEdit_text = findViewById(R.id.createEdit_text);
+        TextView createEdit_text = findViewById(R.id.createEdit_text);
 
 
         TextView tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
