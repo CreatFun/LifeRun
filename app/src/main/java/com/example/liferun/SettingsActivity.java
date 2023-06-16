@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         tv_aboutApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startAboutAppPopup();
             }
         });
 
@@ -72,6 +72,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void startSetGoalsPopup(){
         SetGoalsPopup.startSetGoalsPopupActivity(this);
+    }
+
+    public void startAboutAppPopup(){
+        AboutAppPopup.startAboutAppPopup(this);
     }
 
 
