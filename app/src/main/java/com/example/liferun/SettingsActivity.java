@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
         tv_Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startFeedbackPopup();
             }
         });
 
@@ -76,6 +76,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void startAboutAppPopup(){
         AboutAppPopup.startAboutAppPopup(this);
+    }
+
+    public void startFeedbackPopup(){
+        FeedbackPopup.startFeedbackPopup(this);
     }
 
 
