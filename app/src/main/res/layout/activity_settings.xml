@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/tv_askAuthorization"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Авторизация"
             android:textSize="25sp"
             android:textColor="@color/black"
@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/tv_askPermissions"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Разрешения"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -81,7 +81,7 @@
         <TextView
             android:id="@+id/tv_setGoals"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Настроить цели"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -99,7 +99,7 @@
         <TextView
             android:id="@+id/tv_aboutApp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="О приложении"
             android:textColor="@color/black"
             android:textSize="25sp"
@@ -117,7 +117,7 @@
         <TextView
             android:id="@+id/tv_Feedback"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Обратная связь"
             android:textColor="@color/black"
             android:textSize="25sp"
