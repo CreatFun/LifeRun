@@ -23,8 +23,6 @@ public class ListPage extends Fragment {
 
     FloatingActionButton addNoteButton;
 
-    private RecyclerView recyclerView;
-
 
     public ListPage() {
         // Required empty public constructor
@@ -44,7 +42,7 @@ public class ListPage extends Fragment {
 
         View v =  inflater.inflate(R.layout.fragment_list_page, container, false);
 
-        recyclerView = v.findViewById(R.id.list);
+        RecyclerView recyclerView = v.findViewById(R.id.list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

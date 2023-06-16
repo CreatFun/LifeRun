@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SortedList;
 
 import com.example.liferun.model.Event;
-import com.example.liferun.model.Note;
 
 import java.time.ZoneId;
-import java.time.temporal.ChronoField;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
@@ -94,7 +92,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     static class EventViewHolder extends RecyclerView.ViewHolder{
 
-        TextView eventTime, eventName;
+        TextView eventName;
 
         Event event;
 

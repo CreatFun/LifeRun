@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,7 +24,6 @@ import java.util.List;
 public class EventPopup extends AppCompatActivity {
 
     TextView date;
-    private RecyclerView recyclerView;
     FloatingActionButton addEventButton;
 
     boolean isUpdated = false;
@@ -59,7 +57,7 @@ public class EventPopup extends AppCompatActivity {
 //        dateText = String.valueOf(CalendarPage.pickedDate.getDayOfMonth())+CalendarPage.pickedDate.getMonth();
         date.setText(dateText);
 
-        recyclerView = findViewById(R.id.eventsList);
+        RecyclerView recyclerView = findViewById(R.id.eventsList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
