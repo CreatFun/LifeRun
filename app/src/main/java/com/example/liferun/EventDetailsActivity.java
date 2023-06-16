@@ -1,5 +1,6 @@
 package com.example.liferun;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -16,13 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.liferun.model.Event;
-import com.example.liferun.model.Note;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -37,11 +35,11 @@ public class EventDetailsActivity extends AppCompatActivity {
     Button saveEventButton, cancelButton;
 
     private EditText eventName, eventDescription;
-    private TextView createEdit_text, eventDate_text;
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Используем текущую выбранную дату как дату по умолчанию
@@ -79,8 +77,8 @@ public class EventDetailsActivity extends AppCompatActivity {
 
         eventName = findViewById(R.id.eventName);
         eventDescription = findViewById(R.id.eventDescription);
-        createEdit_text = findViewById(R.id.createEdit_text);
-        eventDate_text = findViewById(R.id.eventDate_text);
+        TextView createEdit_text = findViewById(R.id.createEdit_text);
+        TextView eventDate_text = findViewById(R.id.eventDate_text);
         saveEventButton = findViewById(R.id.saveEventButton);
         cancelButton = findViewById(R.id.cancelButton);
         pickDateButton = findViewById(R.id.pickDateButton);
