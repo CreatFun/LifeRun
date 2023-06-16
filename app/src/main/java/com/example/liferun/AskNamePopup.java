@@ -26,6 +26,11 @@ public class AskNamePopup extends AppCompatActivity {
 
         et_name = findViewById(R.id.et_name);
 
+        SharedPreferences prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+        if (prefs.contains("userName") && prefs.getString("userName", null) != null){
+            et_name.setText(prefs.getString("userName", null));
+        }
+
         Button btn_saveName = findViewById(R.id.btn_saveName);
         btn_saveName.setOnClickListener(new View.OnClickListener() {
             @Override

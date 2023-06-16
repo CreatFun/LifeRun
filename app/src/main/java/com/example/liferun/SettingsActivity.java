@@ -37,6 +37,15 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Кнопка настройки имени пользователя
+        TextView tv_setName = findViewById(R.id.tv_setName);
+        tv_setName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAskNamePopup();
+            }
+        });
+
         // Кнопка настройки целей
         TextView tv_setGoals = findViewById(R.id.tv_setGoals);
         tv_setGoals.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Кнопка "О приложении"
         TextView tv_aboutApp = findViewById(R.id.tv_aboutApp);
         tv_aboutApp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Кнопка обратной связи
         TextView tv_Feedback = findViewById(R.id.tv_Feedback);
         tv_Feedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +79,10 @@ public class SettingsActivity extends AppCompatActivity {
     public void startMainActivity(View v){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void startAskNamePopup(){
+        AskNamePopup.startAskNamePopup(this);
     }
 
     public void startSetGoalsPopup(){
