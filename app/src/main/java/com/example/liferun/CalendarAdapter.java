@@ -100,9 +100,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
                     }
                 }
             }
-//        else{
-//            holder.dayOfMonth.setTextColor(Color.BLACK);
-//        }
         }
         else holder.dayOfMonth.setText("");
 
