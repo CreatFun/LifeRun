@@ -64,25 +64,26 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_saveName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_button"
-                app:backgroundTint="@null"
-                android:text="Сохранить"
-                android:textColor="@color/white"
-                android:layout_marginTop="60dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
-                android:layout_weight="1"/>
-
-            <Button
                 android:id="@+id/btn_later"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_button"
                 app:backgroundTint="@null"
                 android:text="Позже"
+                android:textColor="@color/white"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_weight="1"/>
+
+
+            <Button
+                android:id="@+id/btn_saveName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_button"
+                app:backgroundTint="@null"
+                android:text="Сохранить"
                 android:textColor="@color/white"
                 android:layout_marginTop="60dp"
                 android:layout_marginStart="15dp"
