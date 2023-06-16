@@ -18,7 +18,9 @@
         android:contentDescription="add_event"
         android:src="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/btn_color"
+        app:tint="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
