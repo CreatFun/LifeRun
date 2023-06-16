@@ -82,6 +82,7 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     {
         LocalDate date = daysOfMonth.get(position);
         if (date != null){
+            holder.calendarCell.setBackgroundColor(Color.parseColor("#A4AAAF"));
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
             if (CalendarPage.selectedDate.equals(LocalDate.now())
                     & date.getDayOfMonth() == LocalDate.now().getDayOfMonth()){
@@ -90,7 +91,8 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
             }
             if (CalendarPage.pickedDate != null){
                 if (CalendarPage.pickedDate.equals(date)){
-                    holder.calendarCell.setBackgroundColor(Color.parseColor("#B0C7E8"));
+                    holder.calendarCell.setPadding(2,2,2,2);
+                    holder.calendarCell.setBackgroundColor(Color.parseColor("#3C5A76"));
                 }
             }
             if (sortedList.size() != 0){
