@@ -158,8 +158,16 @@ public class MainActivity extends AppCompatActivity  {
 
         }
 
-        tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
+        // Вписываем имя в appBar, если оно сохранено
+        prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+        String name = prefs.getString("userName", null);
+        TextView tv_name = findViewById(R.id.tv_name);
+        if (name != null){
+            tv_name.setText(name);
+        }
+        else tv_name.setText("");
 
+        tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
         // Вписываем текущую дату в appBar
         String dateText;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");

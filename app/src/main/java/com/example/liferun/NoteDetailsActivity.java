@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,8 +89,16 @@ public class NoteDetailsActivity extends AppCompatActivity {
         TextView createEdit_text = findViewById(R.id.createEdit_text);
 
 
-        TextView tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
+        // Вписываем имя в appBar, если оно сохранено
+        SharedPreferences prefs = getSharedPreferences("com.example.liferun", MODE_PRIVATE);
+        String name = prefs.getString("userName", null);
+        TextView tv_name = findViewById(R.id.tv_name);
+        if (name != null){
+            tv_name.setText(name);
+        }
+        else tv_name.setText("");
 
+        TextView tv_dayOfWeekAndDate = findViewById(R.id.tv_dayOfWeekAndDate);
         // Вписываем текущую дату в appBar
         String dateText;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM");
