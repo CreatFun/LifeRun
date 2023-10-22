@@ -1,4 +1,11 @@
 # LifeRun
+
+___
+
+## Disclaimer
+
+This is a student's project. It was made by non-professionals. This project is not being supported.
+
 ___
 
 ## Описание
